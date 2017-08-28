@@ -35,7 +35,6 @@ public:
 
     void writeElements(std::ofstream& file);
     void update();
-    void deformPoint(int point_index, double dX, double dY);
 
     bool areNeighbours(int poly1, int poly2);
     bool areNeighbours(Polygon poly, int poly2);

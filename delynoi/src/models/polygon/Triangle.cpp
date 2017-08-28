@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <mesher/models/polygon/Triangle.h>
+#include <delynoi/models/polygon/Triangle.h>
 
 Triangle::Triangle() {}
 

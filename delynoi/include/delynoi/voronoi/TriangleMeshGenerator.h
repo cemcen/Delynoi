@@ -3,7 +3,9 @@
 
 #include "MeshGenerator.h"
 #include <vector>
+extern "C"{
 #include <delynoi/voronoi/lib/triangle.h>
+};
 #include <unordered_map>
 #include <delynoi/models/neighbourhood/EdgeData.h>
 #include <delynoi/voronoi/structures/PointData.h>

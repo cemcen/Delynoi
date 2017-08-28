@@ -1,8 +1,8 @@
-#include <mesher/models/polygon/Polygon.h>
+#include <delynoi/models/polygon/Polygon.h>
 #include <map>
 #include <utilities/UniqueList.h>
 #include <utilities/Pair.h>
-#include <mesher/models/neighbourhood/SegmentMap.h>
+#include <delynoi/models/neighbourhood/SegmentMap.h>
 
 
 Polygon::Polygon(std::vector<int>& points, std::vector<Point>& p) {

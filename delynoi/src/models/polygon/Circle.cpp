@@ -1,5 +1,5 @@
-#include <mesher/utilities/xpolyutilities.h>
-#include <mesher/models/polygon/Circle.h>
+#include <delynoi/utilities/xpolyutilities.h>
+#include <delynoi/models/polygon/Circle.h>
 #include <delynoi/config/DelynoiConfig.h>
 
 Circle::Circle(double r, Point c) {

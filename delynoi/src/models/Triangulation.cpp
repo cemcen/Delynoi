@@ -10,7 +10,11 @@ std::vector<Triangle> Triangulation::getTriangles() {
     return this->triangles;
 }
 
-void Triangulation::print(std::string fileName) {
+void Triangulation::writeElements(std::ofstream &file) {
+
+}
+
+void Triangulation::printInFile(std::string fileName) {
     std::string path = utilities::getPath();
     path +=  fileName;
 
@@ -35,13 +39,6 @@ void Triangulation::print(std::string fileName) {
 
 
     file.close();
-}
-
-void Triangulation::writeElements(std::ofstream &file) {
-    file << this->triangles.size() << std::endl;
-    for(int i=0;i<this->triangles.size();i++){
-        file << this->triangles[i].getString() << std::endl;
-    }
 }
 
 std::vector<Point> Triangulation::getPoints() {

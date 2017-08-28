@@ -68,11 +68,6 @@ bool Point::operator<(const Point &other) const {
     return this->x<other.x;
 }
 
-void Point::deform(double dX, double dY) {
-    this->x = this->x + dX;
-    this->y = this->y + dY;
-}
-
 double Point::distance(Point p) {
     return (*this - p).squareNorm();
 }

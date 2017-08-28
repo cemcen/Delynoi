@@ -40,16 +40,3 @@ bool PointSegment::intersectionInfinite(Point p1, Point p2, Point &inter) {
 Pair<double> PointSegment::getSlope() {
     return Pair<double>(getSecond().getX() - getFirst().getX(), getSecond().getY() - getFirst().getY());
 }
-
-bool PointSegment::splitSegment(Point splitPoint, std::vector<PointSegment> &newSegments) {
-    bool contains = this->contains(splitPoint);
-
-    if(contains && !(splitPoint==this->getFirst() || splitPoint==this->getSecond())){
-        newSegments.push_back(PointSegment(this->getFirst(), splitPoint));
-        newSegments.push_back(PointSegment(splitPoint, this->getSecond()));
-
-        return true;
-    }
-
-    return false;
-}

@@ -11,7 +11,6 @@ private:
     Point p1;
     Point p2;
 
-    std::vector<Point> getPoints();
 public:
     BoundingBox(Point p1, Point p2);
 
@@ -28,10 +27,6 @@ public:
     bool operator==(const BoundingBox& other) const;
     bool contains(Point p);
     void getSegments(std::vector<PointSegment>& segments);
-    bool fitsInsidePolygon(Polygon poly, std::vector<Point> points);
-    bool intersects(BoundingBox box);
-    Point getClosestTo(Point p);
-    Point centroid();
 };
 
 

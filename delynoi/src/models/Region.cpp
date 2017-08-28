@@ -96,6 +96,24 @@ void Region::addSeedPoints(std::vector<Point> seeds) {
     this->seedPoints.assign(seeds.begin(), seeds.end());
 }
 
+void Region::addSeedsFromFile(std::string fileName) {
+    std::string completeName = utilities::getPath() + fileName;
+    std::ifstream infile(completeName);
+
+    std::string line;
+    std::getline(infile, line);
+    int numberMeshPoints = std::atoi(line.c_str());
+    for (int i = 0; i < numberMeshPoints; ++i) {
+        std::getline(infile, line);
+        std::vector<std::string> splittedLine = utilities::split(line, ' ');
+
+        Point newPoint(std::atof(splittedLine[0].c_str()), std::atof(splittedLine[1].c_str()));
+        this->seedPoints.push_back(newPoint);
+    }
+
+    infile.close();
+}
+
 BoundingBox Region::getBox() {
     double xMin = LLONG_MAX;
     double xMax = LLONG_MIN;

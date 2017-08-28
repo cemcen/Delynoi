@@ -14,7 +14,6 @@ public:
     Neighbours(int i1, int i2);
     Neighbours(Pair<int> p);
     void setNeighbour(int i);
-    void changeNeighbour(int oldN, int newN);
     bool isNeighbour(int i);
     int getFirst() const;
     int getSecond() const;

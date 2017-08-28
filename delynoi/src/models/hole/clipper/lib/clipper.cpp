@@ -38,7 +38,7 @@
 *                                                                              *
 *******************************************************************************/
 
-#include <mesher/models/hole/clipper/lib/clipper.hpp>
+#include <delynoi/models/hole/clipper/lib/clipper.hpp>
 #include <cmath>
 #include <vector>
 #include <algorithm>

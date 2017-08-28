@@ -20,20 +20,6 @@ void Neighbours::setNeighbour(int i) {
     this->n2 = i;
 }
 
-void Neighbours::changeNeighbour(int oldN, int newN) {
-    if(this->n1==oldN){
-        this->n1 = newN;
-        return;
-    }
-
-    if(this->n2==oldN){
-        this->n2 = newN;
-        return;
-    }
-
-    return;
-}
-
 bool Neighbours::isNeighbour(int i) {
     return this->n1==i || this->n2==i;
 }

@@ -51,10 +51,6 @@ Point Mesh::getPoint(int i) {
     return this->points[i];
 }
 
-IndexSegment Mesh::convertSegment(PointSegment s) {
-    return IndexSegment(this->points.indexOf(s.getFirst()), this->points.indexOf(s.getSecond()));
-}
-
 Neighbours Mesh::getNeighbours(IndexSegment s) {
     return this->edges.get(s);
 }

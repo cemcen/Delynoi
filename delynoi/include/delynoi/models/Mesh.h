@@ -11,7 +11,7 @@ protected:
     UniqueList<Point> points;
 public:
     void printInStream(std::ofstream& file);
-    void printInFile(std::string fileName);
+    virtual void printInFile(std::string fileName);
     virtual void writeElements(std::ofstream& file) = 0;
 
     SegmentMap& getSegments();
@@ -23,7 +23,6 @@ public:
     bool isFull();
 
     Point getPoint(int i);
-    IndexSegment convertSegment(PointSegment s);
     Neighbours getNeighbours(IndexSegment s);
 };
 

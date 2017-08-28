@@ -124,10 +124,6 @@ void PolygonalMesh::update() {
     }
 }
 
-void PolygonalMesh::deformPoint(int point_index, double dX, double dY) {
-    this->points[point_index].deform(dX, dY);
-}
-
 Polygon& PolygonalMesh::getPolygon(int index) {
     return this->polygons[index];
 }

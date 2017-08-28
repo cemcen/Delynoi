@@ -15,9 +15,9 @@ private:
 public:
     Triangulation(std::vector<Point>& p, std::vector<Triangle>& t, SegmentMap edges);
     std::vector<Triangle> getTriangles();
-    void print(std::string fileName);
-    void writeElements(std::ofstream& file);
+    void printInFile(std::string fileName);
     std::vector<Point> getPoints();
+    void writeElements(std::ofstream& file);
 };
 
 #endif
