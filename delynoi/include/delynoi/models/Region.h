@@ -36,6 +36,7 @@ public:
     void cleanInternalHoles();
     void generateSeedPoints(PointGenerator p, int nX, int nY);
     void addSeedPoints(std::vector<Point> seeds);
+    void addSeedsFromFile(std::string fileName);
     BoundingBox getBox();
     void getSegments(std::vector<IndexSegment>& s);
     bool containsPoint(Point p);
