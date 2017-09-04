@@ -9,8 +9,18 @@
 #include <random>
 #include <math.h>
 #include <vector>
+#include <iomanip>
 
 namespace utilities {
+    std::string toStringWithPrecision(double d, int precision){
+        std::stringstream sstream;
+        sstream << std::fixed << std::setprecision(precision);
+        sstream << d;
+        std::string s = sstream.str();
+
+        return s;
+    }
+
     int random_integer(int min, int max){
         static std::random_device rd;
         static std::mt19937 rng (rd());

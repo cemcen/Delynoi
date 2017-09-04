@@ -6,6 +6,7 @@ DelynoiConfig::DelynoiConfig() {
     this->circle_discretization_grade = 12;
     this->double_comparison_tolerance = 0.0000001;
     this->scale_for_clipper = 100000;
+    this->precision = 6;
 }
 
 void DelynoiConfig::setDiscretizationGrade(int d) {
@@ -20,6 +21,14 @@ void DelynoiConfig::setScale(int s) {
     this->scale_for_clipper = s;
 }
 
+void DelynoiConfig::setPrecision(Precision::precision p) {
+    this->precision = p;
+}
+
+void DelynoiConfig::setPrecision(int p) {
+    this->precision = p;
+}
+
 int DelynoiConfig::getDiscretizationGrade() {
     return this->circle_discretization_grade;
 }
@@ -30,6 +39,10 @@ double DelynoiConfig::getTolerance() {
 
 int DelynoiConfig::getScale() {
     return this->scale_for_clipper;
+}
+
+int DelynoiConfig::getPrecision() {
+    return this->precision;
 }
 
 DelynoiConfig *DelynoiConfig::instance() {
