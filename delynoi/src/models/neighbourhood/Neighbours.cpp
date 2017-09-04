@@ -20,10 +20,6 @@ void Neighbours::setNeighbour(int i) {
     this->n2 = i;
 }
 
-bool Neighbours::isNeighbour(int i) {
-    return this->n1==i || this->n2==i;
-}
-
 int Neighbours::getFirst() const{
     return this->n1;
 }
@@ -41,14 +37,3 @@ bool Neighbours::operator==(const Neighbours &other) const{
            this->getFirst()==other.getSecond() && this->getSecond()==other.getFirst();
 }
 
-int Neighbours::getOther(int n) {
-    if(this->n1==n){
-        return this->n2;
-    }
-
-    if(this->n2==n){
-        return this->n1;
-    }
-
-    return -1;
-}

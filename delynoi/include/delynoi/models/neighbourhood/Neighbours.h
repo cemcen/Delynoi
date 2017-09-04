@@ -14,10 +14,8 @@ public:
     Neighbours(int i1, int i2);
     Neighbours(Pair<int> p);
     void setNeighbour(int i);
-    bool isNeighbour(int i);
     int getFirst() const;
     int getSecond() const;
-    int getOther(int n);
     std::string getString() const;
     bool operator==(const Neighbours& other) const;
 };

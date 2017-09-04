@@ -94,6 +94,7 @@ void Region::generateSeedPoints(PointGenerator p, int nX, int nY){
 
 void Region::addSeedPoints(std::vector<Point> seeds) {
     this->seedPoints.assign(seeds.begin(), seeds.end());
+    this->clean();
 }
 
 void Region::addSeedsFromFile(std::string fileName) {
@@ -112,6 +113,7 @@ void Region::addSeedsFromFile(std::string fileName) {
     }
 
     infile.close();
+    this->clean();
 }
 
 BoundingBox Region::getBox() {
