@@ -4,8 +4,9 @@
 #include <math.h>
 #include <delynoi/models/basic/Point.h>
 #include <utilities/Pair.h>
+#include <delynoi/config/DelynoiConfig.h>
 
-namespace xpoly_utilities {
+namespace delynoi_utilities {
     void TrivialIndexVector(std::vector<int>& index_vector, int n){
         for(int i=0;i<n; i++){
             index_vector.push_back(i);
@@ -25,7 +26,26 @@ namespace xpoly_utilities {
     }
 
     double orientation(Point p, Point q, Point r){
-        return xpoly_utilities::crossProduct((q-p),(r-p));
+        return delynoi_utilities::crossProduct((q-p),(r-p));
+    }
+
+    std::vector<Point> generateArcPoints(Point center, double radius, double initAngle, double endAngle){
+        std::vector<Point> arcPoints;
+
+        int steps = DelynoiConfig::instance()->getDiscretizationGrade();
+        double delta = (endAngle - initAngle)/steps;
+
+        for(int i=0; i<steps;i++){
+            double angle = initAngle + delta*i;
+
+            double x = center.getX() + radius*std::cos(utilities::radian(angle));
+            double y = center.getY() + radius*std::sin(utilities::radian(angle));
+
+            Point point (x, y);
+            arcPoints.push_back(point);
+        }
+
+        return arcPoints;
     }
 }
 

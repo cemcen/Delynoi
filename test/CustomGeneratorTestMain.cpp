@@ -2,7 +2,7 @@
 #include <cmath>
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/Region.h>
-#include <delynoi/voronoi/TriangleMeshGenerator.h>
+#include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 class CustomGenerator: public Functor{
     inline double apply(double x) {

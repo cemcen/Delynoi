@@ -8,7 +8,7 @@ namespace geometry_functions{
         Point v1 = p2 - p1;
         Point v2 = p3 - p1;
 
-        return xpoly_utilities::crossProduct(v1,v2);
+        return delynoi_utilities::crossProduct(v1,v2);
     }
 
     bool collinear(Point p1, Point p2, Point p3){

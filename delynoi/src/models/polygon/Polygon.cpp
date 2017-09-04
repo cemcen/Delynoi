@@ -25,7 +25,7 @@ Polygon::Polygon(std::vector<int>& points, std::vector<Point>& p) {
 
 void Polygon::mutate(std::vector<Point> &p) {
     this->points.clear();
-    xpoly_utilities::TrivialIndexVector(this->points,p.size());
+    delynoi_utilities::TrivialIndexVector(this->points,p.size());
 
     if(isSelfIntersecting(p)){
         throw std::invalid_argument("Self intersecting polygons are not supported");
@@ -79,7 +79,7 @@ Polygon::Polygon(std::vector<Point> &p) {
         std::invalid_argument("Self intersecting polygons are not supported");
     }
 
-    xpoly_utilities::TrivialIndexVector(this->points,p.size());
+    delynoi_utilities::TrivialIndexVector(this->points,p.size());
 
     std::vector<Point> this_points;
     for(int i=0;i<points.size();i++){
@@ -108,7 +108,7 @@ double Polygon::calculateDiameter(std::vector<Point>& p) {
     double max = -1;
 
     for(int i=0;i<rotatingCalipers.size();i++){
-        double distance = xpoly_utilities::norm (rotatingCalipers[i].first - rotatingCalipers[i].second);
+        double distance = delynoi_utilities::norm (rotatingCalipers[i].first - rotatingCalipers[i].second);
         if(distance>max){
             max = distance;
         }
@@ -228,10 +228,10 @@ bool Polygon::inEdges(std::vector<Point>& p, Point point) {
 bool Polygon::isConvex(std::vector<Point>& p) {
     int n = (int) this->points.size();
 
-    double determinant = xpoly_utilities::orientation(p[0],p[1],p[2]);
+    double determinant = delynoi_utilities::orientation(p[0],p[1],p[2]);
 
     for(int i=1;i<n; i++){
-        double newResult = xpoly_utilities::orientation(p[this->points[i]],p[this->points[(i+1)%n]],p[this->points[(i+2)%n]]);
+        double newResult = delynoi_utilities::orientation(p[this->points[i]],p[this->points[(i+1)%n]],p[this->points[(i+2)%n]]);
 
         if(determinant*newResult<0){
             return false;

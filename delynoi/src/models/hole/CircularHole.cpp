@@ -8,7 +8,7 @@ CircularHole::CircularHole(Point p, double r) : Circle(r, p){
 
 void CircularHole::computeSegments() {
     std::vector<int> indexes;
-    xpoly_utilities::TrivialIndexVector(indexes, (int) this->HolePoints.size());
+    delynoi_utilities::TrivialIndexVector(indexes, (int) this->HolePoints.size());
 
     Polygon discretePolygon (indexes, this->HolePoints);
     discretePolygon.getSegments(this->segments);

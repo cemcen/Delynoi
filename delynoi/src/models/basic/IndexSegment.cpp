@@ -9,12 +9,6 @@ IndexSegment::IndexSegment(const IndexSegment &other) {
 
 IndexSegment::IndexSegment() : Segment<int>(){}
 
-IndexSegment::~IndexSegment() {}
-
-bool IndexSegment::isBoundary(std::vector<Point> p) {
-    return p[this->p1].isInBoundary() && p[this->p2].isInBoundary();
-}
-
 bool IndexSegment::contains(std::vector<Point> &p, Point point) {
     return Segment::contains(point,p[this->p1],p[this->p2]);
 }
@@ -25,10 +19,6 @@ bool IndexSegment::contains(std::vector<Point> p, IndexSegment s) {
 
 Point IndexSegment::middlePoint(std::vector<Point> p) {
     return Point((p[this->p1].getX() + p[this->p2].getX())/2, (p[this->p1].getY() + p[this->p2].getY())/2);
-}
-
-double IndexSegment::cartesianAngle(std::vector<Point> p) {
-    return Segment::cartesianAngle(p[this->p1], p[this->p2]);
 }
 
 bool IndexSegment::intersection(std::vector<Point> points, PointSegment other, Point &inter) {
@@ -51,7 +41,7 @@ bool IndexSegment::isCCW(std::vector<Point> points, Point center) {
     Point p1 = points[this->p1];
     Point p2 = points[this->p2];
 
-    return xpoly_utilities::orientation(p1,p2,center)>0;
+    return delynoi_utilities::orientation(p1,p2,center)>0;
 }
 
 std::string IndexSegment::getString() const {
@@ -69,10 +59,6 @@ bool IndexSegment::operator<(const IndexSegment &other) const {
     }
 
     return this->p1<other.p1;
-}
-
-double IndexSegment::length(std::vector<Point>& points) {
-    return Segment::length(points[this->p1], points[this->p2]);
 }
 
 bool IndexSegment::isInCorner(Point p, std::vector<Point> points, int& i) {
@@ -95,12 +81,4 @@ bool IndexSegment::isContained(PointSegment s, std::vector<Point> p) {
 
 IndexSegment IndexSegment::add(int o) {
     return IndexSegment(this->p1 + o, this->p2 + o);
-}
-
-bool IndexSegment::isEndPoint(Point p, std::vector<Point> points) {
-    return p == points[this->getFirst()] || p == points[this->getSecond()];
-}
-
-PointSegment IndexSegment::toPointSegment(std::vector<Point> points) {
-    return PointSegment(points[this->getFirst()], points[this->getSecond()]);
 }

@@ -1,7 +1,7 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/Region.h>
 #include <delynoi/models/generator/functions.h>
-#include <delynoi/voronoi/TriangleMeshGenerator.h>
+#include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 int main(){
     std::vector<Point> l_points = {Point(10,0), Point(20,0), Point(20,20), Point(0,20), Point(0,10), Point(10,10)};

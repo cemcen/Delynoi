@@ -9,16 +9,10 @@ public:
     PointSegment(Point p1, Point p2);
     PointSegment();
 
-    double length();
-    bool isBoundary(std::vector<Point> p);
     bool contains(Point point);
-    bool intersection(PointSegment other, Point& inter);
-    std::string getString() const;
-    double cartesianAngle();
+    std::string getString() const override;
     bool operator==(const PointSegment other) const;
     bool intersectionInfinite(Point p1, Point p2, Point& inter);
-    Pair<double> getSlope();
-
 };
 
 

@@ -1,7 +1,7 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/Region.h>
 #include <delynoi/models/generator/functions.h>
-#include <delynoi/voronoi/TriangleMeshGenerator.h>
+#include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 int main(){
     std::vector<Point> unicorn_points = {Point(2,0), Point(3,0.5), Point(3.5,2), Point(4,4), Point(6,4), Point(8.5,4),
@@ -12,10 +12,10 @@ int main(){
                                          Point(7.3,15.3), Point(7,13.8), Point(6.7,11.5), Point(3.3,11.3), Point(1,10.5),
                                          Point(0.4,8.8), Point(0.3,6.8), Point(0.4,4), Point(0.8,2.1), Point(1.3,0.4)};
     Region unicorn(unicorn_points);
-    unicorn.generateSeedPoints(PointGenerator(functions::constant(), functions::constant()), 5, 5);
+    unicorn.generateSeedPoints(PointGenerator(functions::constant(), functions::constant()), 10, 10);
 
     std::vector<Point> seeds = unicorn.getSeedPoints();
-    TriangleMeshGenerator g(seeds, unicorn);
+    TriangleVoronoiGenerator g(seeds, unicorn);
 
     PolygonalMesh mesh = g.getMesh();
     mesh.printInFile("unicornMesh.txt");

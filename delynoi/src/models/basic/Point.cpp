@@ -67,7 +67,3 @@ bool Point::operator<(const Point &other) const {
 
     return this->x<other.x;
 }
-
-double Point::distance(Point p) {
-    return (*this - p).squareNorm();
-}

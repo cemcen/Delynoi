@@ -2,7 +2,7 @@
 #include <delynoi/models/Region.h>
 #include <delynoi/models/hole/CircularHole.h>
 #include <delynoi/models/generator/functions.h>
-#include <delynoi/voronoi/TriangleMeshGenerator.h>
+#include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 int main(){
     std::vector<Point> square_points = {Point(0,0), Point(10,0), Point(10,10), Point(0,10)};
