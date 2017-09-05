@@ -17,6 +17,7 @@ private:
     SegmentMap delaunayEdges;
 
     std::vector<PointData> points;
+    UniqueList<int> realPoints;
     std::vector<EdgeData> edges;
     std::unordered_map<Key, int, KeyHasher> edgeMap;
 

@@ -5,9 +5,10 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo del) {
     SegmentMap voronoiEdges;
     UniqueList<Polygon> voronoiCells;
 
-    for(int index=0;index<del.meshPoints.size(); index++) {
+    for(int i=0;i<del.realPoints.size(); i++) {
         std::vector<IndexSegment> thisEdges;
 
+        int index = del.realPoints[i];
         UniqueList<int> cellPoints;
         Point regionCenter = del.meshPoints[index];
         EdgeData init_edge = del.edges[del.points[index].edge];

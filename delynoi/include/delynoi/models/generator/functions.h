@@ -4,6 +4,8 @@
 #include "Functor.h"
 
 namespace functions {
+    enum independent_variable{x, y, both};
+
     Functor* constant();
     Functor* constantAlternating();
     Functor* uniform(double delta);

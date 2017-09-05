@@ -84,6 +84,9 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
     for(int i=0;i<out.numberoftriangles;i++){
         std::vector<int> triangle_points = {out.trianglelist[3*i], out.trianglelist[3*i+1],
                                             out.trianglelist[3*i+2]};
+        realPoints.push_back(out.trianglelist[3*i]);
+        realPoints.push_back(out.trianglelist[3*i+1]);
+        realPoints.push_back(out.trianglelist[3*i+2]);
 
         Triangle triangle (triangle_points, this->meshPoints);
         int i1 = edgeMap[Key(out.trianglelist[3*i], out.trianglelist[3*i+1])];
@@ -125,12 +128,18 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
 }
 
 Mesh TriangleDelaunayGenerator::getDelaunayTriangulation() {
+    UniqueList<Point> points;
+    std::vector<int> indexes = points.push_list(this->meshPoints);
+
     std::vector<Polygon> polygons;
     for (Triangle t: triangles) {
-        polygons.push_back(Polygon(t.getPoints(), meshPoints));
+        std::vector<int> oldPoints = t.getPoints();
+        std::vector<int> newPoints = {indexes[oldPoints[0]], indexes[oldPoints[1]], indexes[oldPoints[2]]};
+
+        polygons.push_back(Polygon(newPoints, meshPoints));
     }
 
-    return Mesh(this->meshPoints, polygons, this->delaunayEdges);
+    return Mesh(points, polygons, this->delaunayEdges);
 }
 
 void
@@ -158,5 +167,5 @@ TriangleDelaunayGenerator::writeTriangleInputFile(UniqueList<Point> &point_list,
 }
 
 DelaunayInfo TriangleDelaunayGenerator::getDelaunay() {
-    return DelaunayInfo(triangles, meshPoints, delaunayEdges, points, edges, edgeMap);
+    return DelaunayInfo(triangles, meshPoints, delaunayEdges, points, realPoints, edges, edgeMap);
 }

@@ -7,10 +7,12 @@
 
 class TriangleVoronoiGenerator {
 private:
-    Mesh mesh;
+    Mesh voronoi;
+    Mesh delaunay;
 public:
     TriangleVoronoiGenerator(std::vector<Point>& point_list, Region region);
     Mesh getMesh();
+    Mesh getDelaunay();
 };
 
 #endif

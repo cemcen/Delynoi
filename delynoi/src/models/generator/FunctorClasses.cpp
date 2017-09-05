@@ -30,7 +30,7 @@ public:
     }
 
     inline double apply(double x){
-        return amplitude*std::sin(utilities::radian(2*M_PI*x*frecuency) + utilities::radian(phase));
+        return amplitude*std::sin(utilities::radian(frecuency*x*180) + utilities::radian(phase));
     };
 };
 
@@ -47,7 +47,7 @@ public:
     }
 
     inline double apply(double x){
-        return amplitude*std::cos(utilities::radian(2*M_PI*x*frecuency) + utilities::radian(phase));;
+        return amplitude*std::cos(utilities::radian(frecuency*x*180) + utilities::radian(phase));;
     };
 };
 

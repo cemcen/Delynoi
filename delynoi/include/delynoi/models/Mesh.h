@@ -14,6 +14,7 @@ protected:
 public:
     Mesh();
     Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s);
+    Mesh(UniqueList<Point> p, std::vector<Polygon>& e, SegmentMap s);
     Mesh(const Mesh& m);
     void printInStream(std::ofstream& file);
     void printInFile(std::string fileName);

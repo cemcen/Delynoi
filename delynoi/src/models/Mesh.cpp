@@ -10,6 +10,12 @@ Mesh::Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s) {
     this->edges = s;
 }
 
+Mesh::Mesh(UniqueList<Point> p, std::vector<Polygon> &e, SegmentMap s) {
+    this->points.push_list(p);
+    this->polygons.assign(e.begin(), e.end());
+    this->edges = s;
+}
+
 Mesh::Mesh(const Mesh &m) {
     this->points = m.getPoints();
     this->polygons = m.getPolygons();

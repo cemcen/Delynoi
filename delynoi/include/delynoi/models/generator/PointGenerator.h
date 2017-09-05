@@ -4,14 +4,19 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/polygon/BoundingBox.h>
 #include "Functor.h"
+#include "functions.h"
 #include <vector>
 
 class PointGenerator {
 private:
     Functor* lX;
     Functor* lY;
+    functions::independent_variable variable;
+
+    Point result(double x, double y);
 public:
     PointGenerator(Functor* lX, Functor* lY);
+    PointGenerator(Functor* l, functions::independent_variable variable);
     void generate(std::vector<Point>& vector, BoundingBox box, int nX, int nY);
 };
 

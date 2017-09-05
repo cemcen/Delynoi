@@ -3,6 +3,23 @@
 PointGenerator::PointGenerator(Functor* lX, Functor* lY) {
     this->lX = lX;
     this->lY = lY;
+
+    this->variable = functions::independent_variable::both;
+}
+
+PointGenerator::PointGenerator(Functor *l, functions::independent_variable variable) {
+    this->variable = variable;
+
+    switch(variable){
+        case functions::independent_variable::x:
+            this->lY = l;
+            break;
+        case functions::independent_variable::y:
+            this->lX = l;
+            break;
+        case functions::independent_variable::both:
+            throw std::invalid_argument("Both free variables and only one generator function given");
+    }
 }
 
 void PointGenerator::generate(std::vector <Point> &vector, BoundingBox box, int nX, int nY) {
@@ -14,10 +31,21 @@ void PointGenerator::generate(std::vector <Point> &vector, BoundingBox box, int 
             double x = box.xMin() + j*dX;
             double y = box.yMin() + i*dY;
 
-            vector.push_back(Point(lX->apply(x), lY->apply(y)));
+            vector.push_back(result(x,y));
         }
     }
 }
 
+Point PointGenerator::result(double x, double y) {
+    switch(variable){
+        case functions::independent_variable::x:
+            return Point(x, y + this->lY->apply(x));
+        case functions::independent_variable::y:
+            return Point(x + this->lX->apply(y), y);
+        case functions::independent_variable::both:
+            return Point(this->lX->apply(x), this->lY->apply(y));
+
+    }
+}
 
 
