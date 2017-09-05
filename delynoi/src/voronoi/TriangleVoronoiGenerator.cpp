@@ -7,7 +7,7 @@ TriangleVoronoiGenerator::TriangleVoronoiGenerator(std::vector<Point> &point_lis
     this->mesh = DelaunayToVoronoi(delaunay).getMesh();
 }
 
-PolygonalMesh TriangleVoronoiGenerator::getMesh() {
+Mesh TriangleVoronoiGenerator::getMesh() {
     return this->mesh;
 }
 

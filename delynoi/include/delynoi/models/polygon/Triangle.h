@@ -6,7 +6,7 @@
 #include <delynoi/voronoi/structures/mapdata.h>
 #include <unordered_map>
 
-class Triangle : public Polygon{
+class Triangle : public Polygon {
 private:
     Point circumcenter;
     Point calculateCircumcenter(std::vector<Point>& p);

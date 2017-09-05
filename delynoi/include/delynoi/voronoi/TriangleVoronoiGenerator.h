@@ -3,14 +3,14 @@
 
 #include <delynoi/voronoi/TriangleDelaunayGenerator.h>
 #include <delynoi/voronoi/structures/DelaunayInfo.h>
-#include <delynoi/models/PolygonalMesh.h>
+#include <delynoi/models/Mesh.h>
 
 class TriangleVoronoiGenerator {
 private:
-    PolygonalMesh mesh;
+    Mesh mesh;
 public:
     TriangleVoronoiGenerator(std::vector<Point>& point_list, Region region);
-    PolygonalMesh getMesh();
+    Mesh getMesh();
 };
 
 #endif

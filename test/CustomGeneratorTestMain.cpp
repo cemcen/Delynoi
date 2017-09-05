@@ -17,7 +17,7 @@ int main(){
     square.generateSeedPoints(PointGenerator(new CustomGenerator(), new CustomGenerator()), 10, 10);
     std::vector<Point> seeds = square.getSeedPoints();
 
-    TriangleMeshGenerator generator (seeds, square);
-    PolygonalMesh m = generator.getMesh();
+    TriangleVoronoiGenerator generator (seeds, square);
+    Mesh m = generator.getMesh();
     m.printInFile("CustomGeneratorMesh.txt");
 }

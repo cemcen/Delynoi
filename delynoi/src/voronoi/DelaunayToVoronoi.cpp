@@ -5,10 +5,9 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo del) {
     SegmentMap voronoiEdges;
     UniqueList<Polygon> voronoiCells;
 
-    for(int i=0;i<del.realPoints.size(); i++) {
+    for(int index=0;index<del.meshPoints.size(); index++) {
         std::vector<IndexSegment> thisEdges;
 
-        int index = del.realPoints[i];
         UniqueList<int> cellPoints;
         Point regionCenter = del.meshPoints[index];
         EdgeData init_edge = del.edges[del.points[index].edge];
@@ -96,7 +95,7 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo del) {
     std::vector<Point> points = voronoiPoints.getList();
     std::vector<Polygon> cells = voronoiCells.getList();
 
-    this->mesh = PolygonalMesh(points, cells, voronoiEdges);
+    this->mesh = Mesh(points, cells, voronoiEdges);
 }
 
 
@@ -111,6 +110,6 @@ Point DelaunayToVoronoi::getCircumcenter(DelaunayInfo del, int triangle, int edg
     }
 }
 
-PolygonalMesh DelaunayToVoronoi::getMesh() {
+Mesh DelaunayToVoronoi::getMesh() {
     return this->mesh;
 }

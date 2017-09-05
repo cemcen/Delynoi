@@ -4,16 +4,16 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/polygon/Triangle.h>
 #include <delynoi/voronoi/structures/DelaunayInfo.h>
-#include <delynoi/models/PolygonalMesh.h>
+#include <delynoi/models/Mesh.h>
 
 class DelaunayToVoronoi {
 private:
-    PolygonalMesh mesh;
+    Mesh mesh;
 
     Point getCircumcenter(DelaunayInfo del, int triangle, int edge);
 public:
     explicit DelaunayToVoronoi(DelaunayInfo del);
-    PolygonalMesh getMesh();
+    Mesh getMesh();
 };
 
 #endif
