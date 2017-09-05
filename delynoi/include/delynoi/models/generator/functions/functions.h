@@ -1,7 +1,7 @@
 #ifndef DELYNOI_FUNCTIONS_H
 #define DELYNOI_FUNCTIONS_H
 
-#include "Functor.h"
+#include "delynoi/models/generator/Functor.h"
 
 namespace functions {
     enum independent_variable{x, y, both};

@@ -4,7 +4,7 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/polygon/BoundingBox.h>
 #include "Functor.h"
-#include "functions.h"
+#include "delynoi/models/generator/functions/functions.h"
 #include <vector>
 
 class PointGenerator {

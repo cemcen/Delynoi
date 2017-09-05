@@ -1,6 +1,6 @@
 #include <delynoi/models/generator/Functor.h>
-#include <delynoi/models/generator/RandomDouble.h>
-#include <delynoi/models/generator/RandomInteger.h>
+#include <delynoi/models/generator/functions/RandomDouble.h>
+#include <delynoi/models/generator/functions/RandomInteger.h>
 #include "FunctorClasses.cpp"
 
 namespace functions {

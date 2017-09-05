@@ -1,6 +1,6 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/Region.h>
-#include <delynoi/models/generator/functions.h>
+#include <delynoi/models/generator/functions/functions.h>
 #include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 int main(){

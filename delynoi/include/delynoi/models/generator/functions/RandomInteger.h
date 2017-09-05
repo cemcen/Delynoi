@@ -2,7 +2,7 @@
 #define DELYNOI_RANDOMINTEGER_H
 
 #include <random>
-#include "Functor.h"
+#include "delynoi/models/generator/Functor.h"
 
 class Random_Integer : public Functor {
 private:
