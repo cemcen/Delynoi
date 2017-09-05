@@ -8,8 +8,8 @@ namespace functions {
         return new Uniform(1.0);
     }
 
-    Functor *constantAlternating() {
-        return new ConstantAlternating();
+    Functor *displace_points(double delta) {
+        return new DisplaceDelta(delta);
     }
 
     Functor *uniform(double delta) {
