@@ -3,6 +3,7 @@
 DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo del) {
     UniqueList<Point> voronoiPoints;
     SegmentMap voronoiEdges;
+    PointMap pointMap;
     UniqueList<Polygon> voronoiCells;
 
     for(int i=0;i<del.realPoints.size(); i++) {
@@ -91,12 +92,16 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo del) {
         for (int j = 0; j < thisEdges.size(); ++j) {
             voronoiEdges.insert(thisEdges[j], cellIndex);
         }
+
+        for (int k = 0; k < cellPoints.size(); ++k) {
+            pointMap.insert(voronoiPoints[cellPoints[k]], cellIndex);
+        }
     }
 
     std::vector<Point> points = voronoiPoints.getList();
     std::vector<Polygon> cells = voronoiCells.getList();
 
-    this->mesh = Mesh(points, cells, voronoiEdges);
+    this->mesh = Mesh(points, cells, voronoiEdges, pointMap);
 }
 
 

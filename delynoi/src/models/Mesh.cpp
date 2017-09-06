@@ -4,22 +4,25 @@
 
 Mesh::Mesh() {}
 
-Mesh::Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s) {
+Mesh::Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s, PointMap pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;
+    this->pointMap = pM;
 }
 
-Mesh::Mesh(UniqueList<Point> p, std::vector<Polygon> &e, SegmentMap s) {
+Mesh::Mesh(UniqueList<Point> p, std::vector<Polygon> &e, SegmentMap s, PointMap pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;
+    this->pointMap = pM;
 }
 
 Mesh::Mesh(const Mesh &m) {
     this->points = m.getPoints();
     this->polygons = m.getPolygons();
     this->edges = m.getSegments();
+    this->pointMap = m.getPointMap();
 }
 
 
@@ -117,6 +120,14 @@ SegmentMap Mesh::getSegments() const {
     return this->edges;
 }
 
+PointMap &Mesh::getPointMap() {
+    return this->pointMap;
+}
+
+PointMap Mesh::getPointMap() const {
+    return this->pointMap;
+}
+
 UniqueList <Point> &Mesh::getPoints() {
     return this->points;
 }
@@ -129,6 +140,6 @@ Point Mesh::getPoint(int i) {
     return this->points[i];
 }
 
-Neighbours Mesh::getNeighbours(IndexSegment s) {
+NeighboursBySegment Mesh::getNeighbours(IndexSegment s) {
     return this->edges.get(s);
 }

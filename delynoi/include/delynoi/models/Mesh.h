@@ -5,16 +5,18 @@
 #include <utilities/UniqueList.h>
 #include <fstream>
 #include <delynoi/models/polygon/Polygon.h>
+#include <delynoi/models/neighbourhood/PointMap.h>
 
 class Mesh{
 protected:
     SegmentMap edges;
+    PointMap pointMap;
     UniqueList<Point> points;
     std::vector<Polygon> polygons;
 public:
     Mesh();
-    Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s);
-    Mesh(UniqueList<Point> p, std::vector<Polygon>& e, SegmentMap s);
+    Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s, PointMap pM);
+    Mesh(UniqueList<Point> p, std::vector<Polygon>& e, SegmentMap s, PointMap pM);
     Mesh(const Mesh& m);
     void printInStream(std::ofstream& file);
     void printInFile(std::string fileName);
@@ -28,11 +30,14 @@ public:
     SegmentMap& getSegments();
     SegmentMap getSegments() const ;
 
+    PointMap& getPointMap();
+    PointMap getPointMap() const;
+
     UniqueList<Point>& getPoints();
     UniqueList<Point> getPoints() const;
 
     Point getPoint(int i);
-    Neighbours getNeighbours(IndexSegment s);
+    NeighboursBySegment getNeighbours(IndexSegment s);
 };
 
 
