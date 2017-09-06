@@ -27,8 +27,8 @@ Mesh::Mesh(const Mesh &m) {
 
 
 void Mesh::createFromFile(std::string fileName) {
-    std::string completeName = utilities::getPath() + fileName;
-    std::ifstream infile(completeName);
+    std::ifstream infile;
+    infile = utilities::openFile(fileName);
 
     createFromStream(infile);
 

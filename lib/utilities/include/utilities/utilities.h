@@ -38,6 +38,7 @@ namespace utilities{
     extern double radian(double angle);
     extern double degrees(double angle);
     extern std::vector<std::string> split(std::string s, char d);
+    extern std::ifstream& openFile(std::string fileName);
 }
 
 #endif 

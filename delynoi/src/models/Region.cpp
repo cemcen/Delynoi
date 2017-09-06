@@ -98,8 +98,8 @@ void Region::addSeedPoints(std::vector<Point> seeds) {
 }
 
 void Region::addSeedsFromFile(std::string fileName) {
-    std::string completeName = utilities::getPath() + fileName;
-    std::ifstream infile(completeName);
+    std::ifstream infile;
+    infile = utilities::openFile(fileName);
 
     std::string line;
     std::getline(infile, line);
