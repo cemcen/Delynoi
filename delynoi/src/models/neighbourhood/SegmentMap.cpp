@@ -7,31 +7,27 @@ void SegmentMap::insert(IndexSegment s, int polygonIndex) {
     auto got = this->map.find(s);
 
     if(got == this->map.end()){
-        Neighbours n (polygonIndex);
+        NeighboursBySegment n (polygonIndex);
         this->map.insert(std::make_pair(s,n));
     }else{
         got->second.setNeighbour(polygonIndex);
     }
 }
 
-void SegmentMap::insert(IndexSegment s, Neighbours n) {
+void SegmentMap::insert(IndexSegment s, NeighboursBySegment n) {
     this->map[s] = n;
 }
 
-Neighbours& SegmentMap::get(IndexSegment s) {
+NeighboursBySegment& SegmentMap::get(IndexSegment s) {
     return map[s];
 }
 
-std::unordered_map<IndexSegment,Neighbours, SegmentHasher>& SegmentMap::getMap() {
+std::unordered_map<IndexSegment,NeighboursBySegment, SegmentHasher>& SegmentMap::getMap() {
     return this->map;
 }
 
 int SegmentMap::size() {
     return this->map.size();
-}
-
-void SegmentMap::delete_element(IndexSegment key) {
-    this->map.erase(key);
 }
 
 void SegmentMap::printInFile(std::string fileName) {

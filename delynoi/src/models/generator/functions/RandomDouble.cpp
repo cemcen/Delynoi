@@ -1,4 +1,4 @@
-#include <delynoi/models/generator/RandomDouble.h>
+#include <delynoi/models/generator/functions/RandomDouble.h>
 
 std::default_random_engine Random_Double::rd;
 std::mt19937 Random_Double::rng(rd());

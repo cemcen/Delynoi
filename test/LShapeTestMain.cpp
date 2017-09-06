@@ -1,6 +1,6 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/Region.h>
-#include <delynoi/models/generator/functions.h>
+#include <delynoi/models/generator/functions/functions.h>
 #include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 int main(){
@@ -10,7 +10,7 @@ int main(){
     l_region.generateSeedPoints(PointGenerator(functions::random_double(0,20), functions::random_double(0,20)), 10, 10);
     std::vector<Point> seeds = l_region.getSeedPoints();
 
-    TriangleMeshGenerator meshGenerator = TriangleMeshGenerator(seeds, l_region);
-    PolygonalMesh LRandom = meshGenerator.getMesh();
+    TriangleVoronoiGenerator g(seeds, l_region);
+    Mesh LRandom = g.getMesh();
     LRandom.printInFile("LShapedMesh.txt");
 }

@@ -1,11 +1,14 @@
 #ifndef DELYNOI_FUNCTIONS_H
 #define DELYNOI_FUNCTIONS_H
 
-#include "Functor.h"
+#include "delynoi/models/generator/Functor.h"
 
 namespace functions {
+    enum independent_variable{x, y, both};
+
     Functor* constant();
-    Functor* constantAlternating();
+    Functor* displace_points(double delta);
+    Functor* displace_row();
     Functor* uniform(double delta);
     Functor* random_integer(double min, double max);
     Functor* random_double(double min, double max);

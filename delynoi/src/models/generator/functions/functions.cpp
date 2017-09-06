@@ -1,6 +1,6 @@
 #include <delynoi/models/generator/Functor.h>
-#include <delynoi/models/generator/RandomDouble.h>
-#include <delynoi/models/generator/RandomInteger.h>
+#include <delynoi/models/generator/functions/RandomDouble.h>
+#include <delynoi/models/generator/functions/RandomInteger.h>
 #include "FunctorClasses.cpp"
 
 namespace functions {
@@ -8,8 +8,8 @@ namespace functions {
         return new Uniform(1.0);
     }
 
-    Functor *constantAlternating() {
-        return new ConstantAlternating();
+    Functor *displace_points(double delta) {
+        return new DisplaceDelta(delta);
     }
 
     Functor *uniform(double delta) {

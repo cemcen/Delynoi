@@ -2,6 +2,7 @@
 #include <delynoi/models/generator/Functor.h>
 #include <ctime>
 #include <utilities/UniqueList.h>
+#include <float.h>
 
 class Constant : public Functor {
 public:
@@ -30,7 +31,7 @@ public:
     }
 
     inline double apply(double x){
-        return amplitude*std::sin(frecuency*utilities::radian(x) + utilities::radian(phase));
+        return amplitude*std::sin(utilities::radian(frecuency*x*180) + utilities::radian(phase));
     };
 };
 
@@ -47,35 +48,27 @@ public:
     }
 
     inline double apply(double x){
-        return amplitude*std::cos(frecuency*utilities::radian(x) + utilities::radian(phase));
+        return amplitude*std::cos(utilities::radian(frecuency*x*180) + utilities::radian(phase));;
     };
 };
 
-class ConstantAlternating: public Functor{
+class DisplaceDelta: public Functor{
 private:
-    UniqueList<double> visitedPlaces;
     double delta;
     bool alternating = false;
 public:
-    ConstantAlternating(){}
-    inline double apply(double x){
-        if(visitedPlaces.size()==1){
-            delta = std::abs(visitedPlaces[0] - x);
-        }
+    DisplaceDelta(double delta){
+        this->delta = delta;
+    }
 
-        int index = visitedPlaces.push_back(x);
+    inline double apply(double x) {
+        alternating = !alternating;
 
-        if(index<visitedPlaces.size()-1){
-            alternating = !alternating;
-            visitedPlaces.clear();
-        }
-
-        if(alternating){
-            return x + delta/2;
-        }else{
+        if (alternating) {
+            return x + delta / 2;
+        } else {
             return x;
         }
     }
-
 };
 

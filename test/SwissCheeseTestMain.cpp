@@ -1,7 +1,7 @@
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/Region.h>
 #include <delynoi/models/hole/CircularHole.h>
-#include <delynoi/models/generator/functions.h>
+#include <delynoi/models/generator/functions/functions.h>
 #include <delynoi/voronoi/TriangleVoronoiGenerator.h>
 
 int main(){
@@ -20,8 +20,8 @@ int main(){
     square.generateSeedPoints(PointGenerator(functions::random_double(0,10), functions::random_double(0,10)), 10, 10);
     std::vector<Point> seeds = square.getSeedPoints();
 
-    TriangleMeshGenerator generator (seeds, square);
-    PolygonalMesh m = generator.getMesh();
+    TriangleVoronoiGenerator generator (seeds, square);
+    Mesh m = generator.getMesh();
     m.printInFile("SwissCheeseMesh.txt");
 
 }

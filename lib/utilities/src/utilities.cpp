@@ -10,6 +10,7 @@
 #include <math.h>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 namespace utilities {
     std::string toStringWithPrecision(double d, int precision){
@@ -75,6 +76,17 @@ namespace utilities {
         }
 
         return result;
+    }
+
+    std::ifstream& openFile(std::string fileName){
+        std::string completeName = utilities::getPath() + fileName;
+        std::ifstream infile(completeName);
+
+        if(!infile.good()){
+            throw std::runtime_error("Could not open file. Please check path.");
+        }
+
+        return infile;
     }
 }
 
