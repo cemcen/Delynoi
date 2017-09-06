@@ -48,21 +48,23 @@ square.addSeedPoints(seeds);
 <li> With the points coordinates listed on a text file, say <b>seeds.txt</b> (an example is found in the
 test folder), call: <br>
 <pre><code>square.addSeedsFromFile("seeds.txt");</code></pre></li> 
-<li> Decide on two generation rules ( one for each axis) from the predifined list of functions (or create a new one inheriting 
-following the instructions found on the manual), and create a PointGenerator instance. Then, call, including the PointGenerator and the number of 
+<li> Decide on two generation rules (one for each axis) from the predifined list of functions (or create a new one inheriting 
+following the instructions found on the manual), and create a PointGenerator instance. If required, include a noise function 
+from the noise list provided. Then, call, including the PointGenerator and the number of 
 points on each axis: <br>
 <pre><code>PointGenerator rules(functions::random_double(0,10), functions::random_double(0,10));
 int nX = 5, nY = 5;
 square.generateSeedPoints(rules, nX, nY); </code></pre></li>
 </ol>
-<li> Create a TriangleMeshGenerator instances with the points inside the domain, and the domain
-itself; when the MeshGenerator is created, it computes the Delaunay triangulation. <br>
+<li> Create a TriangleVoronoiGenerator instances with the points inside the domain, and the domain
+itself:<br>
 <pre><code>std::vector<Point> seeds = square.getSeedPoints();
-TriangleMeshGenerator generator (seeds, square);</code></pre></li>
-<li> To actually obtain the polygonal mesh, call: <br>
-<pre><code>PolygonalMesh mesh = generator.getMesh();</code></pre></li>
-<li> To write the polygonal mesh on a text file: <br>
-<pre><code>mesh.printInFile("mesh.txt");</code></pre></li>
+TriangleVoronoiGenerator generator (seeds, square);</code></pre></li>
+<li> To obtain the delaunay triangulation and the voronoi diagram, call: <br>
+<pre><code>Mesh delaunay = generator.getDelaunay();
+Mesh voronoi = generator.getMesh();</code></pre></li>
+<li> To write any mesh on a text file: <br>
+<pre><code>voronoi.printInFile("mesh.txt");</code></pre></li>
 </ol>
 
 <h2>Acknowledgements</h2>
