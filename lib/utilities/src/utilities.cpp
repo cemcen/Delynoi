@@ -11,6 +11,7 @@
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include <regex>
 
 namespace utilities {
     std::string toStringWithPrecision(double d, int precision){
@@ -66,19 +67,25 @@ namespace utilities {
         return key;
     }
 
-    std::vector<std::string> split(std::string s, char d) {
+    std::vector<std::string> split(std::string s, const std::regex regex) {
         std::vector<std::string> result;
-        std::stringstream stream(s);
-        std::string segment;
 
-        while(std::getline(stream, segment, d)){
-            result.push_back(segment);
+        std::sregex_token_iterator it(s.begin(), s.end(), regex, -1 );
+        std::sregex_token_iterator reg_end;
+
+        for ( ; it != reg_end; ++it ) {
+            if (!it->str().empty())
+                result.emplace_back( it->str());
         }
 
         return result;
     }
 
-    std::ifstream& openFile(std::string fileName){
+    std::vector<std::string> splitBySpaces(std::string s) {
+        return split(s, std::regex("\\s+"));
+    }
+
+    std::ifstream openFile(std::string fileName){
         std::string completeName = utilities::getPath() + fileName;
         std::ifstream infile(completeName);
 

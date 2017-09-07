@@ -8,7 +8,6 @@ namespace functions {
 
     Functor* constant();
     Functor* displace_points(double delta);
-    Functor* displace_row();
     Functor* uniform(double delta);
     Functor* random_integer(double min, double max);
     Functor* random_double(double min, double max);

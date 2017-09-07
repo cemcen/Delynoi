@@ -106,7 +106,7 @@ void Region::addSeedsFromFile(std::string fileName) {
     int numberMeshPoints = std::atoi(line.c_str());
     for (int i = 0; i < numberMeshPoints; ++i) {
         std::getline(infile, line);
-        std::vector<std::string> splittedLine = utilities::split(line, ' ');
+        std::vector<std::string> splittedLine = utilities::splitBySpaces(line);
 
         Point newPoint(std::atof(splittedLine[0].c_str()), std::atof(splittedLine[1].c_str()));
         this->seedPoints.push_back(newPoint);

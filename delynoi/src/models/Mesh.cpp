@@ -27,8 +27,7 @@ Mesh::Mesh(const Mesh &m) {
 
 
 void Mesh::createFromFile(std::string fileName) {
-    std::ifstream infile;
-    infile = utilities::openFile(fileName);
+    std::ifstream infile = utilities::openFile(fileName);
 
     createFromStream(infile);
 
@@ -41,7 +40,7 @@ void Mesh::createFromStream(std::ifstream &infile) {
     int numberMeshPoints = std::atoi(line.c_str());
     for (int i = 0; i < numberMeshPoints; ++i) {
         std::getline(infile, line);
-        std::vector<std::string> splittedLine = utilities::split(line, ' ');
+        std::vector<std::string> splittedLine = utilities::splitBySpaces(line);
 
         Point newPoint(std::atof(splittedLine[0].c_str()), std::atof(splittedLine[1].c_str()));
         this->points.push_back(newPoint);
@@ -52,7 +51,7 @@ void Mesh::createFromStream(std::ifstream &infile) {
 
     for (int i = 0; i < numberMeshPolygons; ++i) {
         std::getline(infile, line);
-        std::vector<std::string> splittedLine = utilities::split(line, ' ');
+        std::vector<std::string> splittedLine = utilities::splitBySpaces(line);
 
         std::vector<int> polygonPoints;
         for (int j = 1; j < splittedLine.size(); ++j) {
