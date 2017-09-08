@@ -1,32 +1,35 @@
 #include <delynoi/models/Mesh.h>
 #include <utilities/utilities.h>
 
+template <typename T>
+Mesh<T>::Mesh() {}
 
-Mesh::Mesh() {}
-
-Mesh::Mesh(std::vector<Point> &p, std::vector<Polygon> &e, SegmentMap s, PointMap pM) {
+template <typename T>
+Mesh<T>::Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap s, PointMap pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;
     this->pointMap = pM;
 }
 
-Mesh::Mesh(UniqueList<Point> p, std::vector<Polygon> &e, SegmentMap s, PointMap pM) {
+template <typename T>
+Mesh<T>::Mesh(UniqueList<Point> p, std::vector<T> &e, SegmentMap s, PointMap pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;
     this->pointMap = pM;
 }
 
-Mesh::Mesh(const Mesh &m) {
+template <typename T>
+Mesh<T>::Mesh(const Mesh &m) {
     this->points = m.getPoints();
     this->polygons = m.getPolygons();
     this->edges = m.getSegments();
     this->pointMap = m.getPointMap();
 }
 
-
-void Mesh::createFromFile(std::string fileName) {
+template <typename T>
+void Mesh<T>::createFromFile(std::string fileName) {
     std::ifstream infile = utilities::openFile(fileName);
 
     createFromStream(infile);
@@ -34,7 +37,8 @@ void Mesh::createFromFile(std::string fileName) {
     infile.close();
 }
 
-void Mesh::createFromStream(std::ifstream &infile) {
+template <typename T>
+void Mesh<T>::createFromStream(std::ifstream &infile) {
     std::string line;
     std::getline(infile, line);
     int numberMeshPoints = std::atoi(line.c_str());
@@ -58,7 +62,7 @@ void Mesh::createFromStream(std::ifstream &infile) {
             polygonPoints.push_back(std::atoi(splittedLine[j].c_str()) - 1);
         }
 
-        Polygon newPolygon(polygonPoints, this->points.getList());
+        T newPolygon(polygonPoints, this->points.getList());
         this->polygons.push_back(newPolygon);
         std::vector<IndexSegment> segments;
         newPolygon.getSegments(segments);
@@ -69,7 +73,8 @@ void Mesh::createFromStream(std::ifstream &infile) {
     }
 }
 
-void Mesh::printInFile(std::string fileName) {
+template <typename T>
+void Mesh<T>::printInFile(std::string fileName) {
     std::string path = utilities::getPath();
     path +=  fileName;
 
@@ -81,19 +86,23 @@ void Mesh::printInFile(std::string fileName) {
     file.close();
 }
 
-std::vector<Polygon>& Mesh::getPolygons() {
+template <typename T>
+std::vector<T>& Mesh<T>::getPolygons() {
     return this->polygons;
 }
 
-std::vector<Polygon> Mesh::getPolygons() const {
+template <typename T>
+std::vector<T> Mesh<T>::getPolygons() const {
     return this->polygons;
 }
 
-Polygon& Mesh::getPolygon(int index) {
+template <typename T>
+T& Mesh<T>::getPolygon(int index) {
     return this->polygons[index];
 }
 
-void Mesh::printInStream(std::ofstream &file) {
+template <typename T>
+void Mesh<T>::printInStream(std::ofstream &file) {
     file << points.size() << std::endl;
     for(int i=0;i<points.size();i++){
         file << points[i].getString() << std::endl;
@@ -111,34 +120,45 @@ void Mesh::printInStream(std::ofstream &file) {
     }
 }
 
-SegmentMap &Mesh::getSegments() {
+template <typename T>
+SegmentMap &Mesh<T>::getSegments() {
     return this->edges;
 }
 
-SegmentMap Mesh::getSegments() const {
+template <typename T>
+SegmentMap Mesh<T>::getSegments() const {
     return this->edges;
 }
 
-PointMap &Mesh::getPointMap() {
+template <typename T>
+PointMap &Mesh<T>::getPointMap() {
     return this->pointMap;
 }
 
-PointMap Mesh::getPointMap() const {
+template <typename T>
+PointMap Mesh<T>::getPointMap() const {
     return this->pointMap;
 }
 
-UniqueList <Point> &Mesh::getPoints() {
+template <typename T>
+UniqueList <Point> &Mesh<T>::getPoints() {
     return this->points;
 }
 
-UniqueList <Point> Mesh::getPoints() const {
+template <typename T>
+UniqueList <Point> Mesh<T>::getPoints() const {
     return this->points;
 }
 
-Point Mesh::getPoint(int i) {
+template <typename T>
+Point Mesh<T>::getPoint(int i) {
     return this->points[i];
 }
 
-NeighboursBySegment Mesh::getNeighbours(IndexSegment s) {
+template <typename T>
+NeighboursBySegment Mesh<T>::getNeighbours(IndexSegment s) {
     return this->edges.get(s);
 }
+
+template class Mesh<Polygon>;
+template class Mesh<Triangle>;

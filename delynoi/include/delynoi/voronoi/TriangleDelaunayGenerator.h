@@ -4,6 +4,7 @@
 #include <delynoi/models/Region.h>
 #include <delynoi/voronoi/structures/PointData.h>
 #include <delynoi/voronoi/structures/DelaunayInfo.h>
+#include <delynoi/models/Mesh.h>
 
 extern "C"{
 #include <delynoi/voronoi/lib/triangle.h>
@@ -24,7 +25,7 @@ private:
     void callTriangle(std::vector<Point> &point_list, char switches[]);
 public:
     TriangleDelaunayGenerator(Region region, std::vector<Point> points);
-    Mesh getDelaunayTriangulation();
+    Mesh<Triangle> getDelaunayTriangulation();
     DelaunayInfo getDelaunay();
 
     void writeTriangleInputFile(UniqueList<Point> &point_list, Region region, std::vector<int> regionIndex);

@@ -21,7 +21,7 @@ int main(){
     std::vector<Point> seeds = square.getSeedPoints();
 
     TriangleVoronoiGenerator generator (seeds, square);
-    Mesh m = generator.getMesh();
+    Mesh<Polygon> m = generator.getMesh();
     m.printInFile("SwissCheeseMesh.txt");
 
 }

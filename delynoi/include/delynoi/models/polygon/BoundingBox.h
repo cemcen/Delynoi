@@ -3,8 +3,6 @@
 
 #include <delynoi/models/basic/Point.h>
 #include <delynoi/models/basic/PointSegment.h>
-#include <delynoi/models/Mesh.h>
-#include <delynoi/models/polygon/Polygon.h>
 
 class BoundingBox {
 private:

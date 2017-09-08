@@ -101,7 +101,7 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo del) {
     std::vector<Point> points = voronoiPoints.getList();
     std::vector<Polygon> cells = voronoiCells.getList();
 
-    this->mesh = Mesh(points, cells, voronoiEdges, pointMap);
+    this->mesh = Mesh<Polygon>(points, cells, voronoiEdges, pointMap);
 }
 
 
@@ -116,6 +116,6 @@ Point DelaunayToVoronoi::getCircumcenter(DelaunayInfo del, int triangle, int edg
     }
 }
 
-Mesh DelaunayToVoronoi::getMesh() {
+Mesh<Polygon> DelaunayToVoronoi::getMesh() {
     return this->mesh;
 }

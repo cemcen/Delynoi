@@ -61,8 +61,8 @@ itself:<br>
 <pre><code>std::vector<Point> seeds = square.getSeedPoints();
 TriangleVoronoiGenerator generator (seeds, square);</code></pre></li>
 <li> To obtain the delaunay triangulation and the voronoi diagram, call: <br>
-<pre><code>Mesh delaunay = generator.getDelaunay();
-Mesh voronoi = generator.getMesh();</code></pre></li>
+<pre><code>Mesh&ltTriangle&gt delaunay = generator.getDelaunay();
+Mesh&ltPolygon&gt voronoi = generator.getMesh();</code></pre></li>
 <li> To write any mesh on a text file: <br>
 <pre><code>voronoi.printInFile("mesh.txt");</code></pre></li>
 </ol>

@@ -11,8 +11,8 @@ int main(){
     square.generateSeedPoints(PointGenerator(functions::constant(), functions::constant()), 3, 3);
     std::vector<Point> seeds = square.getSeedPoints();
     TriangleVoronoiGenerator g(seeds, square);
-    Mesh m = g.getMesh();
-    Mesh t = g.getDelaunay();
+    Mesh<Polygon> m = g.getMesh();
+    Mesh<Triangle> t = g.getDelaunayTriangulation();
     m.printInFile("simpleSquareMesh.txt");
     t.printInFile("simpleSquareMesh_t.txt");
 }

@@ -8,12 +8,12 @@
 
 class DelaunayToVoronoi {
 private:
-    Mesh mesh;
+    Mesh<Polygon> mesh;
 
     Point getCircumcenter(DelaunayInfo del, int triangle, int edge);
 public:
     explicit DelaunayToVoronoi(DelaunayInfo del);
-    Mesh getMesh();
+    Mesh<Polygon> getMesh();
 };
 
 #endif

@@ -17,6 +17,6 @@ int main(){
     std::vector<Point> seeds = unicorn.getSeedPoints();
     TriangleVoronoiGenerator g(seeds, unicorn);
 
-    Mesh mesh = g.getMesh();
+    Mesh<Polygon> mesh = g.getMesh();
     mesh.printInFile("unicornMesh.txt");
 }

@@ -11,6 +11,6 @@ int main(){
     std::vector<Point> seeds = l_region.getSeedPoints();
 
     TriangleVoronoiGenerator g(seeds, l_region);
-    Mesh LRandom = g.getMesh();
+    Mesh<Polygon> LRandom = g.getMesh();
     LRandom.printInFile("LShapedMesh.txt");
 }
