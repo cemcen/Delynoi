@@ -45,6 +45,14 @@ bool Segment<T>::isVertex(T p) {
 }
 
 template <class T>
+double Segment<T>::cartesianAngle(Point p1, Point p2) {
+    double dY = p2.getY() - p1.getY();
+    double dX = p2.getX() - p1.getX();
+
+    return utilities::degrees(atan2(dY, dX));
+}
+
+template <class T>
 bool Segment<T>::intersects(Point p1, Point p2, Point o1, Point o2, Point &inter) {
     double tolerance = DelynoiConfig::instance()->getTolerance();
 
