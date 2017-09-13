@@ -23,6 +23,7 @@ public:
     bool operator==(const IndexSegment& other) const;
     bool operator<(const IndexSegment& other) const;
     bool isInCorner(Point p, std::vector<Point> points, int& i);
+    double length(std::vector<Point>& points);
     IndexSegment add(int o);
 };
 

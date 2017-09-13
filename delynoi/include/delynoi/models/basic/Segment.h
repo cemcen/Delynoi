@@ -12,6 +12,7 @@ protected:
     T p1;
     T p2;
 
+    double length(Point p1, Point p2);
     bool intersects(Point p1, Point p2, Point o1, Point o2, Point& inter);
     bool intersectionInfinite(Point p1, Point p2, Point o1, Point o2, Point &inter);
     bool contains(Point point, Point p1, Point p2);

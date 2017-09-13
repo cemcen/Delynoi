@@ -92,5 +92,10 @@ bool Segment<T>::intersectionInfinite(Point p1, Point p2, Point o1, Point o2, Po
     return false;
 }
 
+template <class T>
+double Segment<T>::length(Point p1, Point p2) {
+    return std::sqrt(std::pow(p1.getX() - p2.getX(), 2) + std::pow(p1.getY() - p2.getY(),2));
+}
+
 template class Segment<int>;
 template class Segment<Point>;

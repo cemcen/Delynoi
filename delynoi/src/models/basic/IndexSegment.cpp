@@ -61,6 +61,10 @@ bool IndexSegment::operator<(const IndexSegment &other) const {
     return this->p1<other.p1;
 }
 
+double IndexSegment::length(std::vector<Point>& points) {
+    return Segment::length(points[this->p1], points[this->p2]);
+}
+
 bool IndexSegment::isInCorner(Point p, std::vector<Point> points, int& i) {
     if(points[this->p1]==p){
         i = this->p1;

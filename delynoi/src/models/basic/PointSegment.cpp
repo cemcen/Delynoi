@@ -8,6 +8,10 @@ bool PointSegment::contains(Point point) {
     return Segment::contains(point,p1,p2);
 }
 
+double PointSegment::length() {
+    return Segment::length(this->p1, this->p2);
+}
+
 std::string PointSegment::getString() const {
     return this->getFirst().getString() + " " + this->getSecond().getString();
 }

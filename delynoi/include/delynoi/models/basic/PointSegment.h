@@ -9,6 +9,7 @@ public:
     PointSegment(Point p1, Point p2);
     PointSegment();
 
+    double length();
     bool contains(Point point);
     std::string getString() const override;
     bool operator==(const PointSegment other) const;
