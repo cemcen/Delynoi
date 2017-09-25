@@ -15,7 +15,7 @@ struct NeighboursHasher{
 };
 
 class SegmentMap{
-private:
+protected:
     std::unordered_map<IndexSegment,NeighboursBySegment,SegmentHasher> map;
 public:
     SegmentMap();

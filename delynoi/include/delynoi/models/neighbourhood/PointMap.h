@@ -16,7 +16,7 @@ struct PointHasher {
 };
 
 class PointMap {
-private:
+protected:
     std::unordered_map<Point, NeighboursByPoint, PointHasher> map;
 public:
     PointMap();

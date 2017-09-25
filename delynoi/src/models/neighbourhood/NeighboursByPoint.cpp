@@ -13,3 +13,11 @@ NeighboursByPoint::NeighboursByPoint(std::vector<int> n) {
 void NeighboursByPoint::add(int n) {
     this->neighbours.push_back(n);
 }
+
+std::vector<int> NeighboursByPoint::getNeighbours() const {
+    return this->neighbours;
+}
+
+std::vector<int> &NeighboursByPoint::getNeighbours() {
+    return this->neighbours;
+}
