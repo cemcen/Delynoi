@@ -13,6 +13,8 @@ extern "C"{
 class TriangleDelaunayGenerator {
 private:
     Region region;
+    std::vector<Point> seedPoints;
+
     std::vector<Triangle> triangles;
     std::vector<Point> meshPoints;
     SegmentMap delaunayEdges;
@@ -23,10 +25,12 @@ private:
     std::unordered_map<Key, int, KeyHasher> edgeMap;
 
     void callTriangle(std::vector<Point> &point_list, char switches[]);
+    Mesh<Triangle> initializeMesh();
 public:
     TriangleDelaunayGenerator(Region region, std::vector<Point> points);
-    Mesh<Triangle> getDelaunayTriangulation();
-    DelaunayInfo getDelaunay();
+    Mesh<Triangle> getConformingDelaunayTriangulation();
+    Mesh<Triangle> getConstrainedDelaunay();
+    DelaunayInfo getConformingDelaunay();
 
     void writeTriangleInputFile(UniqueList<Point> &point_list, Region region, std::vector<int> regionIndex);
 };
