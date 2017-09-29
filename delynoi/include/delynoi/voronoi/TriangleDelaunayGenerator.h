@@ -29,7 +29,7 @@ private:
 public:
     TriangleDelaunayGenerator(Region region, std::vector<Point> points);
     Mesh<Triangle> getConformingDelaunayTriangulation();
-    Mesh<Triangle> getConstrainedDelaunay();
+    Mesh<Triangle> getConstrainedDelaunayTriangulation();
     DelaunayInfo getConformingDelaunay();
 
     void writeTriangleInputFile(UniqueList<Point> &point_list, Region region, std::vector<int> regionIndex);

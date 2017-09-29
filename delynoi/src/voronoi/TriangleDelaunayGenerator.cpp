@@ -181,7 +181,7 @@ DelaunayInfo TriangleDelaunayGenerator::getConformingDelaunay() {
     return DelaunayInfo(triangles, meshPoints, delaunayEdges, points, realPoints, edges, edgeMap);
 }
 
-Mesh<Triangle> TriangleDelaunayGenerator::getConstrainedDelaunay() {
+Mesh<Triangle> TriangleDelaunayGenerator::getConstrainedDelaunayTriangulation() {
     char switches[] = "pzejQ";
 
     callTriangle(seedPoints, switches);
