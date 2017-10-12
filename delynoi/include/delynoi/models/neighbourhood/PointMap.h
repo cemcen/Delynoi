@@ -21,6 +21,7 @@ protected:
 public:
     PointMap();
     void insert(Point p, int neighbour);
+    void insert(Point p, std::vector<int> neighbours);
     NeighboursByPoint& get(Point p);
     std::unordered_map<Point, NeighboursByPoint, PointHasher>& getMap();
     int size();

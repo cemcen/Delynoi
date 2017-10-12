@@ -14,6 +14,18 @@ void PointMap::insert(Point p, int neighbour) {
     }
 }
 
+void PointMap::insert(Point p, std::vector<int> neighbours) {
+    auto got = this->map.find(p);
+
+    if(got == this->map.end()){
+        NeighboursByPoint n (neighbours);
+        this->map.insert(std::make_pair(p,n));
+    }else{
+        NeighboursByPoint& n = got->second;
+        n.insert(neighbours);
+    }
+}
+
 NeighboursByPoint &PointMap::get(Point p) {
     return this->map[p];
 }
