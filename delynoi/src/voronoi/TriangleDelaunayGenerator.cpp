@@ -6,6 +6,12 @@ TriangleDelaunayGenerator::TriangleDelaunayGenerator(Region region, std::vector<
 }
 
 void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, char *switches) {
+   this->callTriangle(point_list, switches, std::vector<IndexSegment>());
+}
+
+void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, char *switches,
+                                             std::vector<IndexSegment> restrictedSegments) {
+
     struct triangulateio in, out;
 
     std::vector<Point> regionPoints = region.getRegionPoints();
@@ -31,13 +37,21 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
     std::vector<IndexSegment> segments;
     region.getSegments(segments);
 
-    in.numberofsegments = (int) (segments.size());
+    in.numberofsegments = (int) (segments.size() + restrictedSegments.size());
     in.segmentlist = (int*)malloc(in.numberofsegments*2*sizeof(int));
     in.segmentmarkerlist = (int*) NULL;
     int k;
     for(k=0;k<segments.size();k++){
         in.segmentlist[2*k] = regionIndex[segments[k].getFirst()];
         in.segmentlist[2*k+1] = regionIndex[segments[k].getSecond()];
+    }
+
+    for (int j=0; j<restrictedSegments.size(); j++){
+        IndexSegment s = restrictedSegments[j];
+
+        in.segmentlist[2*k] = s.getFirst();
+        in.segmentlist[2*k+1] = s.getSecond();
+        k++;
     }
 
     std::vector<Hole>& holes = region.getHoles();
@@ -122,7 +136,6 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
     free(out.segmentlist);
     free(out.edgelist);
     free(out.edgemarkerlist);
-
 }
 
 Mesh<Triangle> TriangleDelaunayGenerator::initializeMesh() {
@@ -185,5 +198,13 @@ Mesh<Triangle> TriangleDelaunayGenerator::getConstrainedDelaunayTriangulation() 
     char switches[] = "pzejQ";
 
     callTriangle(seedPoints, switches);
+    return initializeMesh();
+}
+
+Mesh<Triangle>
+TriangleDelaunayGenerator::getConstrainedDelaunayTriangulation(std::vector<IndexSegment> restrictedSegments) {
+    char switches[] = "pzejQ";
+
+    callTriangle(seedPoints, switches, restrictedSegments);
     return initializeMesh();
 }

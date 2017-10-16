@@ -25,11 +25,13 @@ private:
     std::unordered_map<Key, int, KeyHasher> edgeMap;
 
     void callTriangle(std::vector<Point> &point_list, char switches[]);
+    void callTriangle(std::vector<Point> &point_list, char switches[], std::vector<IndexSegment> restrictedSegments);
     Mesh<Triangle> initializeMesh();
 public:
     TriangleDelaunayGenerator(Region region, std::vector<Point> points);
     Mesh<Triangle> getConformingDelaunayTriangulation();
     Mesh<Triangle> getConstrainedDelaunayTriangulation();
+    Mesh<Triangle> getConstrainedDelaunayTriangulation(std::vector<IndexSegment> restrictedSegments);
     DelaunayInfo getConformingDelaunay();
 
     void writeTriangleInputFile(UniqueList<Point> &point_list, Region region, std::vector<int> regionIndex);
