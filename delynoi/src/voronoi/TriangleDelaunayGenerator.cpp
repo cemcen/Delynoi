@@ -191,6 +191,9 @@ TriangleDelaunayGenerator::writeTriangleInputFile(UniqueList<Point> &point_list,
 }
 
 DelaunayInfo TriangleDelaunayGenerator::getConformingDelaunay() {
+    char switches[] = "pzejDQ";
+
+    callTriangle(seedPoints, switches);
     return DelaunayInfo(triangles, meshPoints, delaunayEdges, points, realPoints, edges, edgeMap);
 }
 

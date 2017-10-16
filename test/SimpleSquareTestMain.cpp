@@ -12,7 +12,7 @@ int main(){
     std::vector<Point> seeds = square.getSeedPoints();
     TriangleVoronoiGenerator g(seeds, square);
     Mesh<Polygon> m = g.getMesh();
-    Mesh<Triangle> t = g.getDelaunayTriangulation();
+    Mesh<Triangle> t = g.getConstrainedDelaunayTriangulation();
     m.printInFile("simpleSquareMesh.txt");
     t.printInFile("simpleSquareMesh_t.txt");
 }
