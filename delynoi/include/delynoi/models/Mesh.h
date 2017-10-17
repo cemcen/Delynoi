@@ -11,15 +11,16 @@
 template <typename T>
 class Mesh{
 protected:
-    SegmentMap edges;
-    PointMap pointMap;
+    SegmentMap* edges;
+    PointMap* pointMap;
     UniqueList<Point> points;
     std::vector<T> polygons;
 public:
     Mesh();
-    Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap s, PointMap pM);
-    Mesh(UniqueList<Point> p, std::vector<T>& e, SegmentMap s, PointMap pM);
+    Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap* s, PointMap* pM);
+    Mesh(UniqueList<Point> p, std::vector<T>& e, SegmentMap* s, PointMap* pM);
     Mesh(const Mesh& m);
+
     void printInStream(std::ofstream& file);
     void printInFile(std::string fileName);
     void createFromFile(std::string fileName);
@@ -29,11 +30,8 @@ public:
     std::vector<T> getPolygons() const;
     T& getPolygon(int index);
 
-    SegmentMap& getSegments();
-    SegmentMap getSegments() const ;
-
-    PointMap& getPointMap();
-    PointMap getPointMap() const;
+    SegmentMap* getSegments() const;
+    PointMap* getPointMap() const;
 
     UniqueList<Point>& getPoints();
     UniqueList<Point> getPoints() const;
@@ -47,7 +45,7 @@ template <typename T>
 Mesh<T>::Mesh() {}
 
 template <typename T>
-Mesh<T>::Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap s, PointMap pM) {
+Mesh<T>::Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap* s, PointMap* pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;
@@ -55,7 +53,7 @@ Mesh<T>::Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap s, PointMap p
 }
 
 template <typename T>
-Mesh<T>::Mesh(UniqueList<Point> p, std::vector<T> &e, SegmentMap s, PointMap pM) {
+Mesh<T>::Mesh(UniqueList<Point> p, std::vector<T> &e, SegmentMap* s, PointMap* pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;
@@ -110,7 +108,7 @@ void Mesh<T>::createFromStream(std::ifstream &infile) {
         newPolygon.getSegments(segments);
 
         for (IndexSegment s: segments){
-            this->edges.insert(s, i);
+            this->edges->insert(s, i);
         }
     }
 }
@@ -150,8 +148,8 @@ void Mesh<T>::printInStream(std::ofstream &file) {
         file << points[i].getString() << std::endl;
     }
 
-    file << this->edges.size() << std::endl;
-    for(auto e: this->edges.getMap()){
+    file << this->edges->size() << std::endl;
+    for(auto e: this->edges->getMap()){
         IndexSegment edge = e.first;
         file << edge.getString() << std::endl;
     }
@@ -163,22 +161,12 @@ void Mesh<T>::printInStream(std::ofstream &file) {
 }
 
 template <typename T>
-SegmentMap &Mesh<T>::getSegments() {
+SegmentMap* Mesh<T>::getSegments() const{
     return this->edges;
 }
 
 template <typename T>
-SegmentMap Mesh<T>::getSegments() const {
-    return this->edges;
-}
-
-template <typename T>
-PointMap &Mesh<T>::getPointMap() {
-    return this->pointMap;
-}
-
-template <typename T>
-PointMap Mesh<T>::getPointMap() const {
+PointMap* Mesh<T>::getPointMap() const{
     return this->pointMap;
 }
 
@@ -199,7 +187,7 @@ Point Mesh<T>::getPoint(int i) {
 
 template <typename T>
 NeighboursBySegment Mesh<T>::getNeighbours(IndexSegment s) {
-    return this->edges.get(s);
+    return this->edges->get(s);
 }
 
 #endif

@@ -3,6 +3,7 @@
 TriangleDelaunayGenerator::TriangleDelaunayGenerator(Region region, std::vector<Point> points) {
     this->region = region;
     this->seedPoints = points;
+    this->delaunayEdges = new SegmentMap;
 }
 
 void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, char *switches) {
@@ -117,7 +118,7 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
         IndexSegment segment (data.p1, data.p2);
         NeighboursBySegment neighbours(data.t1, data.t2);
 
-        this->delaunayEdges.insert(segment, neighbours);
+        this->delaunayEdges->insert(segment, neighbours);
     }
 
     free(in.pointlist);
@@ -140,7 +141,7 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
 
 Mesh<Triangle> TriangleDelaunayGenerator::initializeMesh() {
     UniqueList<Point> points;
-    PointMap pointMap;
+    PointMap* pointMap = new PointMap;
     std::vector<int> indexes = points.push_list(this->meshPoints);
 
     std::vector<Triangle> polygons;
@@ -149,9 +150,9 @@ Mesh<Triangle> TriangleDelaunayGenerator::initializeMesh() {
         std::vector<int> oldPoints = t.getPoints();
         std::vector<int> newPoints = {indexes[oldPoints[0]], indexes[oldPoints[1]], indexes[oldPoints[2]]};
 
-        pointMap.insert(meshPoints[newPoints[0]], i);
-        pointMap.insert(meshPoints[newPoints[1]], i);
-        pointMap.insert(meshPoints[newPoints[2]], i);
+        pointMap->insert(meshPoints[newPoints[0]], i);
+        pointMap->insert(meshPoints[newPoints[1]], i);
+        pointMap->insert(meshPoints[newPoints[2]], i);
 
         polygons.push_back(Triangle(newPoints, meshPoints));
     }

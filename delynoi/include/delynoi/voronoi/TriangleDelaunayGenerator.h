@@ -17,7 +17,7 @@ private:
 
     std::vector<Triangle> triangles;
     std::vector<Point> meshPoints;
-    SegmentMap delaunayEdges;
+    SegmentMap* delaunayEdges;
 
     std::vector<PointData> points;
     UniqueList<int> realPoints;
