@@ -23,6 +23,7 @@ public:
     void insert(IndexSegment s, NeighboursBySegment n);
     NeighboursBySegment& get(IndexSegment s);
     std::unordered_map<IndexSegment,NeighboursBySegment,SegmentHasher>& getMap();
+    std::unordered_map<IndexSegment,NeighboursBySegment,SegmentHasher> getMap() const;
     int size();
     void printInFile(std::string fileName);
     bool containsSegment(IndexSegment s);
