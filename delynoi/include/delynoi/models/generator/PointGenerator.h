@@ -18,7 +18,7 @@ public:
     PointGenerator();
     PointGenerator(Functor* lX, Functor* lY);
     PointGenerator(Functor* l, functions::independent_variable variable);
-    virtual void generate(std::vector<Point>& vector, BoundingBox box, int nX, int nY);
+    void generate(std::vector<Point>& vector, BoundingBox box, int nX, int nY);
 };
 
 #endif
