@@ -60,11 +60,19 @@ square.generateSeedPoints(rules, nX, nY); </code></pre></li>
 itself:<br>
 <pre><code>std::vector<Point> seeds = square.getSeedPoints();
 TriangleVoronoiGenerator generator (seeds, square);</code></pre></li>
-<li> To obtain the delaunay triangulation and the voronoi diagram, call: <br>
-<pre><code>Mesh&ltTriangle&gt delaunay = generator.getDelaunay();
-Mesh&ltPolygon&gt voronoi = generator.getMesh();</code></pre></li>
-<li> To write any mesh on a text file: <br>
-<pre><code>voronoi.printInFile("mesh.txt");</code></pre></li>
+<li> To obtain the Voronoi diagram, call: <br>
+<pre><code>Mesh&ltPolygon&gt voronoi = generator.getMesh();</code></pre></li>
+<li> To use the Delaunay triangulation instead of the Voronoi diagram, a different class is used, TriangleDelaunayGenerator,
+which can return the constrained Delaunay triangulation or the conforming Delaunay triangulation:
+<pre><code>TriangleDelaunayGenerator generator (seeds, square);
+Mesh&ltTriangle&gt constrained_delaunay = generator.getConstrainedDelaunayTriangulation();
+Mesh&ltTriangle&gt conforming_delaunay  = generator.getConformingDelaunayTriangulation();</code></pre>
+It is also possible to define a number of constrained segments inside the domain, that will not be flipped
+when the Delaunay triangulation is computed:
+<pre><code>Mesh&ltTriangle&gt constrained_delaunay = generator.getConstrainedDelaunayTriangulation(restrictedSegments);
+</code></pre>
+<li> To write any mesh (either of polygons or triangles) on a text file: <br>
+<pre><code>mesh.printInFile("mesh.txt");</code></pre></li>
 </ol>
 
 <h2>Acknowledgements</h2>
