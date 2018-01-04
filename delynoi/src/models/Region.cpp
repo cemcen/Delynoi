@@ -10,8 +10,6 @@ void Region::mutate(std::vector<Point> &points) {
     Polygon::mutate(points);
 }
 
-Region::~Region() {}
-
 Region::Region() : Polygon(){}
 
 Region::Region(const Polygon &other, std::vector<Point>& points) : Polygon() {
@@ -62,7 +60,7 @@ void Region::addHole(Hole h) {
     clipper.Execute(ClipperLib::ctDifference, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
 
     if(solution.size()==1){
-        //Hole does intersect, so Region has to change and the hole "dissapears"
+        //Hole does intersect, so Region has to change and the hole "disappears"
         std::vector<Point> newPoints;
 
         for(int i=0;i<solution[0].size();i++){
@@ -77,7 +75,7 @@ void Region::addHole(Hole h) {
         if(Polygon::containsPoint(this->p, h.getCenter())){
             this->holes.push_back(h);
         }else{
-            throw std::invalid_argument("Hole lies outside region");
+            throw std::invalid_argument("Hole lies completely outside of domain region");
         }
     }
 }

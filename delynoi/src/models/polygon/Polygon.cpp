@@ -287,7 +287,7 @@ bool Polygon::operator<(const Polygon &other) const {
     return this->hash<other.hash;
 }
 
-bool Polygon::isSelfIntersecting(std::vector<Point> points) {
+bool Polygon::isSelfIntersecting(std::vector<Point>& points) {
     std::vector<IndexSegment> segments;
     this->getSegments(segments);
     int n = segments.size();
@@ -307,6 +307,15 @@ bool Polygon::isSelfIntersecting(std::vector<Point> points) {
         }
     }
     return false;
+}
+
+bool Polygon::containsEdge(IndexSegment s) {
+    int n = this->numberOfSides();
+
+    int i = utilities::indexOf(this->points, s.getFirst());
+    int j = utilities::indexOf(this->points, s.getSecond());
+
+    return i!=-1 && j!=-1 && (std::abs(i-j)==1 || std::abs(i-j)==(n-1));
 }
 
 Point Polygon::getAverage(std::vector<Point> p) {
