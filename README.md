@@ -14,7 +14,7 @@ is considered a mesh that is left available for use in case it is desired. Then,
 </ul>
 
 <h2>Author</h2>
-<a href="https://github.com/capalvarez">Catalina Alvarez</a> -  Master's Student at Universidad de Chile.
+<a href="https://github.com/capalvarez">Catalina Alvarez</a> -  B.Sc., M.Sc., Universidad de Chile.
 
 <h2>Usage instructions</h2>
 Delynoi is currently for Unix systems only.
