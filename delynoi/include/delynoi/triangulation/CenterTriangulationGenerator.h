@@ -1,14 +1,12 @@
-#ifndef DELYNOI_DELAUNAYTRIANGULATIONGENERATOR_H
-#define DELYNOI_DELAUNAYTRIANGULATIONGENERATOR_H
+#ifndef VEAMY_CENTERTRIANGULATIONGENERATOR_H
+#define VEAMY_CENTERTRIANGULATIONGENERATOR_H
 
 #include "TriangulationGenerator.h"
-#include <delynoi/models/Region.h>
-#include <delynoi/voronoi/TriangleDelaunayGenerator.h>
 
 /*
- * Class that trriangulates a Polygon using its Delaunay triangulation
+ * Class that triangulates a Polygon (necessarily convex) using its geometrical center
  */
-class DelaunayTriangulationGenerator : public TriangulationGenerator{
+class CenterTriangulationGenerator : public TriangulationGenerator{
 public:
     /* Triangulates a polygon.
     * @param p polygon to triangulate
