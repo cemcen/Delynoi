@@ -8,7 +8,7 @@ Features:
 <li> It allows the inclusion of completely contained or intersecting holes, which are processed if required. </li>
 <li> The meshes are generated from seed points, which can be read either directly from a text file, included one by one, 
 or created from a number of generation rules included in the library. New generation rules can be easily included. </li>
-<li> Meshes can be stored in OFF-style text files, or used directly on another program. </li>
+<li> Meshes can be stored in OFF-style text files, or used directly in another program. </li>
 <li> To generate the meshes, the library first computes the conforming Delaunay triangulation using Triangle; the triangulation
 is considered as a mesh that is left available for use if needed. Then, it computes the constrained Voronoi diagram.</li>
 </ul>
