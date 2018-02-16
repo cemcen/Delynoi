@@ -4,12 +4,12 @@ based on the constrained Voronoi diagram.
 
 Features:
 <ul>
-<li> The meshes are generated on arbitrary domains, created from user points. Domains have no restrictions on convexity. </li>
+<li> The meshes are generated on arbitrary domains, created from user defined points. Domains have no restrictions on convexity. </li>
 <li> It allows the inclusion of completely contained or intersecting holes, which are processed if required. </li>
-<li> The meshes are generated from seed points, which can be either read directly from a text file, included one by one, 
+<li> The meshes are generated from seed points, which can be read either directly from a text file, included one by one, 
 or created from a number of generation rules included in the library. New generation rules can be easily included. </li>
 <li> Meshes can be stored in OFF-style text files, or used directly on another program. </li>
-<li> To generate the meshes, the library first obtains the conforming Delaunay triangulation using Triangle; the triangulation
+<li> To generate the meshes, the library first computes the conforming Delaunay triangulation using Triangle; the triangulation
 is considered as a mesh that is left available for use if needed. Then, it computes the constrained Voronoi diagram.</li>
 </ul>
 
