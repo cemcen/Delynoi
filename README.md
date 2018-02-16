@@ -10,7 +10,7 @@ Features:
 or created from a number of generation rules included in the library. New generation rules can be easily included. </li>
 <li> Meshes can be stored in OFF-style text files, or used directly on another program. </li>
 <li> To generate the meshes, the library first obtains the conforming Delaunay triangulation using Triangle; the triangulation
-is considered a mesh that is left available for use in case it is desired. Then, it computes the constrained Voronoi diagram.</li>
+is considered as a mesh that is left available for use if needed. Then, it computes the constrained Voronoi diagram.</li>
 </ul>
 
 <h2>Author</h2>
@@ -33,15 +33,15 @@ of your main C++ file (in this case, <b>mytest.cpp</b>)
 </ol>
 
 <h2>Usage example</h2>
-To generate a polygonal mesh in any desired domain, one needs to:
+To generate a polygonal mesh, one needs to:
 <ol>
-<li> List, in counter clockwise order, the points that define the domain and 
+<li> List, in counterclockwise order, the points that define the domain and 
 create the domain as a Region instance: <br>
 <pre><code>std::vector<Point> square_points = {Point(0,0), Point(10,0), Point(10,10), Point(0,10)};
 Region square(square_points);   </pre></code></li>
 <li> Include the required seed points on the domain, for which there are three alternatives:
 <ol>
-<li> Create the desired points as a list of Point instances, and call: <br>
+<li> Create the points as a list of Point instances, and call: <br>
 <pre><code>std::vector<Point> seeds = {Point(5,5)};
 square.addSeedPoints(seeds);
 </code></pre></li>
@@ -49,8 +49,8 @@ square.addSeedPoints(seeds);
 test folder), call: <br>
 <pre><code>square.addSeedsFromFile("seeds.txt");</code></pre></li> 
 <li> Decide on two generation rules (one for each axis) from the predifined list of functions (or create a new one inheriting 
-following the instructions found on the manual), and create a PointGenerator instance. If required, include a noise function 
-from the noise list provided. Then, call, including the PointGenerator and the number of 
+following the instructions given in the manual), and create a PointGenerator instance. If required, include a noise function 
+from the noise list provided. Then, call including the PointGenerator and the number of 
 points on each axis: <br>
 <pre><code>PointGenerator rules(functions::random_double(0,10), functions::random_double(0,10));
 int nX = 5, nY = 5;
@@ -71,12 +71,12 @@ It is also possible to define a number of constrained segments inside the domain
 when the Delaunay triangulation is computed:
 <pre><code>Mesh&ltTriangle&gt constrained_delaunay = generator.getConstrainedDelaunayTriangulation(restrictedSegments);
 </code></pre>
-<li> To write any mesh (either of polygons or triangles) on a text file: <br>
+<li> To print the mesh to a text file use: <br>
 <pre><code>mesh.printInFile("mesh.txt");</code></pre></li>
 </ol>
 
 <h2>Acknowledgements</h2>
-Delynoi depends on two external open source libraries, whose code is included in the repository.
+Delynoi depends on two external open source libraries, whose codes are included in the repository.
 <ul>
 <li> <a href="https://www.cs.cmu.edu/~quake/triangle.html"> Triangle - A Two-Dimensional Quality Mesh Generator and 
 Delaunay Triangulator. </a></li>
