@@ -5,6 +5,7 @@
 #include <delynoi/voronoi/structures/PointData.h>
 #include <delynoi/voronoi/structures/DelaunayInfo.h>
 #include <delynoi/models/Mesh.h>
+#include <delynoi/utilities/delynoi_utilities.h>
 
 extern "C"{
 #include <delynoi/voronoi/lib/triangle.h>

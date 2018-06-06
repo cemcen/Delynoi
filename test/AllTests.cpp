@@ -4,6 +4,7 @@
 #include <delynoi/models/hole/CircularHole.h>
 #include <delynoi/models/generator/functions/functions.h>
 #include <delynoi/models/generator/noise/noise.h>
+#include <delynoi/utilities/delynoi_utilities.h>
 
 void generateTest_Polygon(std::string testName, Region r, std::vector<Point> points){
     TriangleVoronoiGenerator g(points, r);
@@ -13,7 +14,7 @@ void generateTest_Polygon(std::string testName, Region r, std::vector<Point> poi
 }
 
 void generateTest_Triangle(std::string testName, Region r, std::vector<Point> points){
-    TriangleDelaunayGenerator g(r,points);
+    TriangleDelaunayGenerator g(points, r);
 
     Mesh<Triangle> m = g.getConformingDelaunayTriangulation();
     m.printInFile(testName + "_triangle.txt");
