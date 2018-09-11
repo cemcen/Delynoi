@@ -7,8 +7,17 @@ Triangle::Triangle(std::vector<int> points, std::vector<Point>& p) : Polygon(poi
     this->circumcenter = this->calculateCircumcenter(p);
 }
 
+Triangle::Triangle(std::vector<int> points, std::vector<Point>& p, UniqueList<Point>& circumcenters) : Polygon(points, p) {
+    this->circumcenter = this->calculateCircumcenter(p);
+    this->circumcenterIndex = circumcenters.push_back(this->circumcenter);
+}
+
 Point Triangle::getCircumcenter() {
     return this->circumcenter;
+}
+
+int Triangle::getCircumcenterIndex() {
+    return this->circumcenterIndex;
 }
 
 Point Triangle::calculateCircumcenter(std::vector<Point>& p){

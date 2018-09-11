@@ -15,8 +15,8 @@ public:
     int push_back(T& item);
     int force_push_back(T& item);
     int size();
-    std::vector<int> push_list(std::vector<T> list);
-    std::vector<int> push_list(UniqueList<T> list);
+    std::vector<int> push_list(std::vector<T>& list);
+    std::vector<int> push_list(UniqueList<T>& list);
     void pop_front();
 
     std::vector<T> getList() const;
@@ -26,7 +26,7 @@ public:
     T& operator[](int i);
     bool operator==(const UniqueList<T>& other);
     bool contains(T elem);
-    bool hasCommonElement(UniqueList<T> other);
+    bool hasCommonElement(UniqueList<T>& other);
 
     void clear();
     void delete_element(T item);
@@ -89,7 +89,7 @@ T& UniqueList<T>::operator[](int i) {
 }
 
 template <class T>
-std::vector<int> UniqueList<T>::push_list(std::vector<T> list) {
+std::vector<int> UniqueList<T>::push_list(std::vector<T>& list) {
     std::vector<int> index;
 
     for(int i=0;i<list.size();i++){
@@ -100,7 +100,7 @@ std::vector<int> UniqueList<T>::push_list(std::vector<T> list) {
 }
 
 template <class T>
-std::vector<int> UniqueList<T>::push_list(UniqueList<T> list) {
+std::vector<int> UniqueList<T>::push_list(UniqueList<T>& list) {
     std::vector<int> index;
 
     for(int i=0;i<list.size();i++){
@@ -122,7 +122,7 @@ std::vector<T>& UniqueList<T>::getList() {
 }
 
 template <class T>
-bool UniqueList<T>::hasCommonElement(UniqueList<T> other) {
+bool UniqueList<T>::hasCommonElement(UniqueList<T>& other) {
     for(int i=0; i<other.size(); i++){
         if(this->contains(other[i])){
             return true;

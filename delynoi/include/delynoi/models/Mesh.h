@@ -44,7 +44,7 @@ public:
     /*
      * Constructor. Creates a mesh from its points, elements and neighbourhood maps
      */
-    Mesh(UniqueList<Point> p, std::vector<T>& e, SegmentMap* s, PointMap* pM);
+    Mesh(UniqueList<Point>& p, std::vector<T>& e, SegmentMap* s, PointMap* pM);
 
     /*
      * Copy constructor
@@ -140,7 +140,7 @@ Mesh<T>::Mesh(std::vector<Point> &p, std::vector<T> &e, SegmentMap* s, PointMap*
 }
 
 template <typename T>
-Mesh<T>::Mesh(UniqueList<Point> p, std::vector<T> &e, SegmentMap* s, PointMap* pM) {
+Mesh<T>::Mesh(UniqueList<Point>& p, std::vector<T> &e, SegmentMap* s, PointMap* pM) {
     this->points.push_list(p);
     this->polygons.assign(e.begin(), e.end());
     this->edges = s;

@@ -10,9 +10,12 @@ int main(){
 
     square.generateSeedPoints(PointGenerator(functions::constant(), functions::constant()), 3, 3);
     std::vector<Point> seeds = square.getSeedPoints();
+    TriangleDelaunayGenerator delaunayGenerator(seeds, square);
     TriangleVoronoiGenerator g(seeds, square);
     Mesh<Polygon> m = g.getMesh();
-    Mesh<Triangle> t = g.getConstrainedDelaunayTriangulation();
+    Mesh<Triangle> t = delaunayGenerator.getConstrainedDelaunayTriangulation();
     m.printInFile("simpleSquareMesh.txt");
     t.printInFile("simpleSquareMesh_t.txt");
+
+    return 0;
 }

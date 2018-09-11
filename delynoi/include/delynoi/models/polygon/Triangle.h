@@ -16,6 +16,8 @@ private:
      */
     Point circumcenter;
 
+    int circumcenterIndex;
+
     /*
      * Calculates the circumcenter
      * @param p mesh points
@@ -33,10 +35,15 @@ public:
      */
     Triangle(std::vector<int> points, std::vector<Point>& p);
 
+
+    Triangle(std::vector<int> points, std::vector<Point>& p, UniqueList<Point>& circumcenters);
+
     /*
      * @return circumcenter of the triangle
      */
     Point getCircumcenter();
+
+    int getCircumcenterIndex();
 
     /*
      * Given an EdgeData instance and a point, determines the next edge that is to be used in the computation of the

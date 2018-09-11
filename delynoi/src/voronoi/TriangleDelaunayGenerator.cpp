@@ -13,6 +13,8 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
 
 void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, char *switches,
                                              std::vector<PointSegment> restrictedSegments) {
+
+    //std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
     this->empty = true;
     struct triangulateio in, out;
 
@@ -102,7 +104,7 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
         realPoints.push_back(out.trianglelist[3*i+1]);
         realPoints.push_back(out.trianglelist[3*i+2]);
 
-        Triangle triangle (triangle_points, this->meshPoints);
+        Triangle triangle (triangle_points, this->meshPoints, this->circumcenters);
         int i1 = edgeMap[Key(out.trianglelist[3*i], out.trianglelist[3*i+1])];
         int i2 = edgeMap[Key(out.trianglelist[3*i+1], out.trianglelist[3*i+2])];
         int i3 = edgeMap[Key(out.trianglelist[3*i+2], out.trianglelist[3*i])];
@@ -138,15 +140,21 @@ void TriangleDelaunayGenerator::callTriangle(std::vector<Point> &point_list, cha
     free(out.segmentlist);
     free(out.edgelist);
     free(out.edgemarkerlist);
+/*
+    std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+
+    std::cout << " Tiempo: " << duration << std::endl;*/
 }
 
-Mesh<Triangle> TriangleDelaunayGenerator::getConformingDelaunayTriangulation()  {
+Mesh<Triangle>& TriangleDelaunayGenerator::getConformingDelaunayTriangulation()  {
     if(!this->empty){
         char switches[] = "pzejDQ";
         callTriangle(seedPoints, switches);
     }
 
-    return initializeMesh<Triangle>();
+    Mesh<Triangle> mesh = initializeMesh<Triangle>();
+    return mesh;
 }
 
 void
@@ -187,7 +195,7 @@ DelaunayInfo TriangleDelaunayGenerator::getConformingDelaunay() {
         callTriangle(seedPoints, switches);
     }
 
-    return DelaunayInfo(triangles, meshPoints, delaunayEdges, points, realPoints, edges, edgeMap);
+    return DelaunayInfo(triangles, meshPoints, delaunayEdges, points, realPoints, edges, edgeMap, circumcenters);
 }
 
 Mesh<Triangle> TriangleDelaunayGenerator::getConstrainedDelaunayTriangulation() {
