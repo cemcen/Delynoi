@@ -25,6 +25,7 @@ int main(){
 
         TriangleVoronoiGenerator g(seeds, square);
         Mesh<Polygon> m = g.getMesh();
+        Mesh<Polygon> t = g.getTriangulation();
 
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
 
@@ -32,6 +33,14 @@ int main(){
         std::cout << duration << ",";
 
         file << "Numero de puntos: " << numberOfPoints[i]*numberOfPoints[i] << " Tiempo: " << duration << std::endl;
+
+        std::string fileName = "mesh_";
+        fileName += utilities::toString(i) + ".txt";
+
+        std::string trianglefileName = "triangle_";
+        trianglefileName += utilities::toString(i) + ".txt";
+
+        t.printInFile(trianglefileName);
     }
 
     return 0;

@@ -45,15 +45,16 @@ UniqueList<T>::UniqueList(const UniqueList<T> &other) {
 
 template <class T>
 int UniqueList<T>::push_back(T& item) {
-    auto iter = map.find(item);
+    auto it = map.upper_bound(item);
 
-    if(iter != map.end())
-        return iter->second;
+    if (it == map.begin() || (--it)->first < item) {
+        map.insert(it, std::make_pair(item, list.size()));
+        list.push_back(item);
 
-    map.insert(std::make_pair(item, list.size()));
-    list.push_back(item);
-
-    return (int) list.size()-1;
+        return (int) list.size()-1;
+    }else{
+        return it->second;
+    }
 }
 
 template <class T>
