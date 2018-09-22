@@ -22,7 +22,6 @@ int main(){
         std::vector<Point> seeds = square.getSeedPoints();
 
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-        std::cout << "Numero de puntos: " << numberOfPoints[i]*numberOfPoints[i];
 
         TriangleVoronoiGenerator g(seeds, square);
         Mesh<Polygon> m = g.getMesh();
@@ -30,6 +29,7 @@ int main(){
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
 
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+        std::cout << duration << ",";
 
         file << "Numero de puntos: " << numberOfPoints[i]*numberOfPoints[i] << " Tiempo: " << duration << std::endl;
     }

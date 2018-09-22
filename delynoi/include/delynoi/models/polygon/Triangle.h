@@ -38,6 +38,8 @@ public:
 
     Triangle(std::vector<int> points, std::vector<Point>& p, UniqueList<Point>& circumcenters);
 
+    Triangle(std::vector<int> points, std::vector<Point>& p, std::vector<Point>& circumcenters);
+
     /*
      * @return circumcenter of the triangle
      */
@@ -53,7 +55,7 @@ public:
      * @param edgeMap map with the information relating edge endpoints and EdgeData indexes
      * @return index of the next EdgeData for the Voronoi diagram computation
      */
-    int nextEdge(int center, EdgeData edge, std::unordered_map<Key, int, KeyHasher> edgeMap);
+    int nextEdge(int center, EdgeData edge, std::unordered_map<Key, int, KeyHasher>& edgeMap);
 
     /*
      * Given an edge, it determines the point of the triangle not contained in it

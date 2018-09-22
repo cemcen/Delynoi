@@ -12,6 +12,7 @@ private:
     std::map<T,int> map;
 public:
     UniqueList();
+    UniqueList(const UniqueList<T>& other);
     int push_back(T& item);
     int force_push_back(T& item);
     int size();
@@ -34,6 +35,13 @@ public:
 
 template <class T>
 UniqueList<T>::UniqueList() {}
+
+
+template<class T>
+UniqueList<T>::UniqueList(const UniqueList<T> &other) {
+    this->list = other.list;
+    this->map = other.map;
+}
 
 template <class T>
 int UniqueList<T>::push_back(T& item) {

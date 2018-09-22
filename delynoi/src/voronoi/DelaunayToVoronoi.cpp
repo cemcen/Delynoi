@@ -1,13 +1,12 @@
 #include "delynoi/voronoi/DelaunayToVoronoi.h"
 
 DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo& del) {
-    std::chrono::high_resolution_clock::time_point time1 = std::chrono::high_resolution_clock::now();
     SegmentMap* voronoiEdges = new SegmentMap;
     PointMap* pointMap = new PointMap;
-    UniqueList<Polygon> voronoiCells;
+    std::vector<Polygon> voronoiCells;
 
-    //std::cout << "Numero de puntos reales: " << del.realPoints.size() << std::endl;
     for(int i=0;i<del.realPoints.size(); i++) {
+        int cellIndex = voronoiCells.size();
         std::vector<IndexSegment> thisEdges;
 
         int index = del.realPoints[i];
@@ -24,14 +23,17 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo& del) {
         if(index1!=index2){
             IndexSegment e (index2,index1);
             thisEdges.push_back(e);
+            voronoiEdges->insert(e, cellIndex);
 
             cellPoints.push_back(index2);
+            pointMap->insert(del.circumcenters[index2], cellIndex);
         }
 
         cellPoints.push_back(index1);
+        pointMap->insert(del.circumcenters[index1], cellIndex);
+
         EdgeData edge = del.edges[del.triangles[t1].nextEdge(index, init_edge, del.edgeMap)];
 
-        int k = 0;
         while(!(edge==init_edge)){
             t2 = t1;
             t1 = edge.t1!=t2? edge.t1 : edge.t2;
@@ -43,18 +45,20 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo& del) {
 
             if(index1!=index2){
                 IndexSegment e (index2, index1);
+
                 thisEdges.push_back(e);
+                voronoiEdges->insert(e, cellIndex);
 
                 cellPoints.push_back(index2);
+                pointMap->insert(del.circumcenters[index2], cellIndex);
             }
 
             cellPoints.push_back(index1);
-            k++;
+            pointMap->insert(del.circumcenters[index1], cellIndex);
 
             if(t1!=-1){
                 edge = del.edges[del.triangles[t1].nextEdge(index, edge, del.edgeMap)];
             }else{
-                //std::cout << "Iteraciones: " << k << std::endl;
                 break;
             }
         }
@@ -66,47 +70,38 @@ DelaunayToVoronoi::DelaunayToVoronoi(DelaunayInfo& del) {
             if(geometry_functions::collinear(del.circumcenters[firstPoint],regionCenter,del.circumcenters[lastPoint])){
                 IndexSegment e (lastPoint, firstPoint);
                 thisEdges.push_back(e);
+
+                voronoiEdges->insert(e, cellIndex);
             } else{
                 regionCenter.setBoundary();
                 int regionIndex = del.circumcenters.push_back(regionCenter);
+
                 cellPoints.push_back(regionIndex);
+                pointMap->insert(del.circumcenters[regionIndex], cellIndex);
 
                 IndexSegment e1(lastPoint, regionIndex);
                 IndexSegment e2(regionIndex, firstPoint);
 
                 thisEdges.push_back(e1);
+                voronoiEdges->insert(e1, cellIndex);
+
                 thisEdges.push_back(e2);
+                voronoiEdges->insert(e2, cellIndex);
             }
         }
 
         std::vector<Point>& pointList = del.circumcenters.getList();
         std::vector<int>& cellPointsList = cellPoints.getList();
 
-        //Check if it is necessary to use a unique list for the polygons
         Polygon p = Polygon(cellPointsList, pointList);
         p.fixCCW(pointList);
 
-        int cellIndex = voronoiCells.push_back(p);
-
-        // Do this while you iterate
-        for (int j = 0; j < thisEdges.size(); ++j) {
-            voronoiEdges->insert(thisEdges[j], cellIndex);
-        }
-
-        for (int k = 0; k < cellPoints.size(); ++k) {
-            pointMap->insert(del.circumcenters[cellPoints[k]], cellIndex);
-        }
+        voronoiCells.push_back(p);
     }
 
-    std::vector<Point> points = del.circumcenters.getList();
-    std::vector<Polygon> cells = voronoiCells.getList();
-    std::chrono::high_resolution_clock::time_point time2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( time2 - time1 ).count();
+    UniqueList<Point>& points = del.circumcenters;
 
-    std::cout <<  " Tiempo: " << duration << std::endl;
-
-
-    this->mesh = Mesh<Polygon>(points, cells, voronoiEdges, pointMap);
+    this->mesh = Mesh<Polygon>(points, voronoiCells, voronoiEdges, pointMap);
 }
 
 
