@@ -81,8 +81,7 @@ double Polygon::calculateArea(std::vector<Point>& p) {
 
 double Polygon::getArea(std::vector<Point>& points){
     if(this->area == -1){
-        std::vector<Point> thisPoints = this->getPoints(points);
-        this->calculateArea(thisPoints);
+        this->area = this->calculateArea(points);
     }
 
     return this->area;
@@ -91,7 +90,7 @@ double Polygon::getArea(std::vector<Point>& points){
 double Polygon::getDiameter(std::vector<Point>& points) {
     if(this->diameter < 0){
         std::vector<Point> thisPoints = this->getPoints(points);
-        this->calculateDiameter(thisPoints);
+        this->diameter = this->calculateDiameter(thisPoints);
     }
 
     return this->diameter;
@@ -100,7 +99,7 @@ double Polygon::getDiameter(std::vector<Point>& points) {
 Point Polygon::getCentroid(std::vector<Point>& points) {
     if(!this->centroid.isValid()){
         std::vector<Point> thisPoints = this->getPoints(points);
-        this->calculateCentroid(thisPoints);
+        this->centroid = this->calculateCentroid(thisPoints);
     }
 
     return this->centroid;
@@ -272,7 +271,7 @@ void Polygon::calculateHash() {
 void Polygon::fixCCW(std::vector<Point> &p) {
     if(isClockwise(p)){
         std::reverse(this->points.begin(), this->points.end());
-        this->area = -this->area;
+        this->area = -1;
     }
 }
 

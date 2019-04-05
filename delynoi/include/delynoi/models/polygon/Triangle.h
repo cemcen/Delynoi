@@ -35,7 +35,6 @@ public:
      */
     Triangle(std::vector<int> points, std::vector<Point>& p);
 
-
     Triangle(std::vector<int> points, std::vector<Point>& p, UniqueList<Point>& circumcenters);
 
     Triangle(std::vector<int> points, std::vector<Point>& p, std::vector<Point>& circumcenters);
